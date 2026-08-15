@@ -766,18 +766,18 @@
             </div>
             <div class="full">
               <label for="f-loc">Preferred clinic</label>
-              <select id="f-loc" name="location">
+              <select id="f-loc" name="location" required>
+                <option value="" selected disabled>Select a clinic</option>
                 <option>San Francisco, Marina</option>
                 <option>Palo Alto</option>
-                <option>Either works</option>
               </select>
             </div>
             <div class="full">
               <label for="f-type">Consult preference</label>
-              <select id="f-type" name="consult_type">
+              <select id="f-type" name="consult_type" required>
+                <option value="" selected disabled>Select in person or phone</option>
                 <option>In person, at the clinic</option>
                 <option>Phone call</option>
-                <option>No preference</option>
               </select>
             </div>
             <div class="full">
