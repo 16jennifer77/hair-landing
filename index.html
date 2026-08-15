@@ -343,6 +343,22 @@
     .g-reviews .g-link:hover{border-color:var(--accent)}
 
     /* ============ 12. CTA offer ============ */
+    /* ============ 11b. team ============ */
+    .team{background:var(--white);border-top:1px solid var(--hair-soft)}
+    .team-head{max-width:720px;margin:0 auto;text-align:center}
+    .team-head .kicker{justify-content:center}
+    .team-head p:not(.kicker){margin-top:16px;color:var(--muted);font-size:1.02rem;line-height:1.75}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.6vw,30px);margin-top:clamp(36px,5vw,54px)}
+    .member{background:var(--paper);border:1px solid var(--hair);border-radius:var(--r);text-align:center;padding:clamp(24px,3vw,34px) clamp(18px,2.4vw,28px)}
+    .medal{width:min(64%,200px);margin:0 auto;padding:8px;border:1px solid var(--hair);border-radius:50%}
+    .medal img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:50% 22%;border-radius:50%;background:#dfe5ee}
+    .member h3{margin-top:20px;font-family:var(--disp);font-weight:500;font-size:1.35rem;line-height:1.2;color:var(--ink)}
+    .member .role{display:block;margin-top:8px;font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-deep)}
+    .member p{margin-top:12px;font-size:.9rem;line-height:1.68;color:var(--muted)}
+    @media (prefers-reduced-motion:no-preference) and (hover:hover){
+      .member{transition:transform .35s ease,border-color .35s ease}
+      .member:hover{transform:translateY(-4px);border-color:var(--ink-2)}
+    }
     .offer{background:var(--paper)}
     .offer-card{
       display:grid;grid-template-columns:5fr 7fr;background:var(--white);border:1px solid var(--hair);
@@ -424,6 +440,7 @@
       .stat-grid{grid-template-columns:1fr 1fr;gap:30px}
       .creds-row{grid-template-columns:1fr 1fr}
       .rv-grid{grid-template-columns:1fr 1fr}
+      .team-grid{grid-template-columns:1fr 1fr}
       .creds-row li:nth-child(3){border-left:none}
       .creds-row li{border-top:1px solid var(--hair-soft)}
       .creds-row li:nth-child(-n+2){border-top:none}
@@ -442,6 +459,7 @@
       .ledger-row .tag{grid-column:2;justify-self:start}
       .form{grid-template-columns:1fr}
       .rv-grid{grid-template-columns:1fr}
+      .team-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
       .cmp-table,.cmp-table tbody,.cmp-table tr,.cmp-table th,.cmp-table td{display:block;width:auto}
       .cmp-table thead{display:none}
       .cmp-table tr{border-top:1px solid rgba(255,255,255,.18);padding:6px 0 10px}
@@ -850,6 +868,41 @@ Also their acne products WORK.</p>
         </li>
       </ul>
       <a class="g-link reveal" style="--d:.2s" href="https://www.google.com/search?q=biohackr+health#lrd=0x808581657af64d31:0x1a2a2a9bc73a82fc,1,,," target="_blank" rel="noopener">Read all our reviews on Google</a>
+    </div>
+  </section>
+
+  <!-- 11b. TEAM (physician-led; mirrors the EBOO LP "team behind the protocol" block) -->
+  <section class="team" id="team" aria-labelledby="team-h">
+    <div class="wrap">
+      <div class="team-head">
+        <p class="kicker reveal">Physician-led</p>
+        <!-- SWAP: team heading + lede -->
+        <h2 id="team-h" class="reveal" style="--d:.07s">The team behind the protocol.</h2>
+        <p class="reveal" style="--d:.14s">Biohackr Health is a medical clinic first. The people supervising your hair plan built careers in medicine long before hair loss became a subscription business.</p>
+      </div>
+      <div class="team-grid">
+        <!-- SWAP: team member 1 -->
+        <article class="member reveal">
+          <div class="medal"><img src="assets/team-bluvas.jpg" width="600" height="600" alt="Portrait of Dr. Lori Bluvas" loading="lazy" decoding="async"></div>
+          <h3>Dr. Lori Bluvas, MD</h3>
+          <span class="role">CEO and Co-founder</span>
+          <p>Board-certified OB/GYN with over 25 years of experience, specializing in women's longevity and hormone optimization. Advanced training from Brown University.</p>
+        </article>
+        <!-- SWAP: team member 2 -->
+        <article class="member reveal" style="--d:.1s">
+          <div class="medal"><img src="assets/team-greenberg.png" width="600" height="600" alt="Portrait of Dr. Lauren Greenberg" loading="lazy" decoding="async"></div>
+          <h3>Dr. Lauren Greenberg, MD</h3>
+          <span class="role">Co-owner and Partner</span>
+          <p>Board-certified plastic surgeon trained at Dartmouth, Northwestern, and Stanford. Has run a boutique practice on Stanford's campus since 1999.</p>
+        </article>
+        <!-- SWAP: team member 3 -->
+        <article class="member reveal" style="--d:.2s">
+          <div class="medal"><img src="assets/team-habibi.png" width="600" height="600" alt="Portrait of Atousa Habibi" loading="lazy" decoding="async"></div>
+          <h3>Atousa Habibi, RN</h3>
+          <span class="role">Chief Operations Officer</span>
+          <p>Registered nurse with 12+ years in aesthetics and clinical operations, formerly VP at Lookout Health, where her clinics delivered thousands of treatments.</p>
+        </article>
+      </div>
     </div>
   </section>
 
