@@ -335,7 +335,7 @@
       border-radius:var(--r);overflow:hidden;
     }
     .offer-media{position:relative;min-height:380px}
-    .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:32% 40%;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06)}
+    .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06)}
     .offer-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 40%,rgba(0,27,63,.4))}
     @media (prefers-reduced-motion:no-preference){
       .offer-badge{animation:bob 6s ease-in-out infinite}
@@ -430,6 +430,7 @@
       .hero-visual{margin-left:0}
       .scope{left:auto;right:-8px;bottom:-38px;width:170px}
       .offer-media{min-height:280px}
+      .offer-media img{object-position:50% 40%}
       .foot-cta{grid-template-columns:1fr}
       .foot-mid{grid-template-columns:1fr}
     }
@@ -790,7 +791,10 @@ Also their acne products WORK.</p>
       <div class="offer-card reveal">
         <div class="offer-media">
           <!-- SWAP: offer image -->
-          <img src="assets/reception-team-928x1160.jpg" width="928" height="1160" alt="Two Biohackr Health front-desk team members laughing together at the reception desk beneath the navy wall sign" loading="lazy" decoding="async">
+          <picture>
+            <source media="(max-width:960px)" srcset="assets/offer-reception-wide-1600x889.jpg">
+            <img src="assets/offer-storefront-928x1856.jpg" width="928" height="1856" alt="The Biohackr Health storefront on Union Street, San Francisco: white clapboard, navy trim, and the red-and-navy Biohackr Health sign above the door" loading="lazy" decoding="async">
+          </picture>
           <!-- SWAP: badge -->
           <span class="offer-badge">20 spots this month</span>
         </div>
