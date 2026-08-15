@@ -335,8 +335,8 @@
       border-radius:var(--r);overflow:hidden;
     }
     .offer-media{position:relative;min-height:380px}
-    .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06)}
-    .offer-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 40%,rgba(0,27,63,.4))}
+    .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:saturate(1.04) contrast(1.02)}
+    .offer-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 55%,rgba(0,27,63,.22))}
     @media (prefers-reduced-motion:no-preference){
       .offer-badge{animation:bob 6s ease-in-out infinite}
       @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -419,7 +419,8 @@
     }
     @media (max-width:720px){
       .nav-links{display:none}
-      .menu-btn{display:inline-flex}
+      .menu-btn{display:none}   /* mobile: no menu at all, header = logo only (Jennifer 08-15) */
+      .m-nav{display:none !important}
       .nav .nav-cta{display:none}
       .plates{grid-template-columns:1fr}
       .ledger-row{grid-template-columns:56px 1fr;grid-template-rows:auto auto}
