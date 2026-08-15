@@ -211,10 +211,24 @@
       .film .fallback.kb{animation:kb 34s ease-in-out infinite alternate}
       @keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
     }
-    .film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,27,63,.14) 0%,rgba(0,27,63,.72) 82%)}
+    .film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,27,63,.18) 0%,rgba(0,27,63,.62) 45%,rgba(0,27,63,.8) 100%)}
     .film-copy{position:relative;z-index:2;padding:clamp(60px,8vw,96px) 26px}
     .film-copy h2{color:#fff}
     .film-copy p{color:rgba(255,255,255,.82);margin-top:14px;max-width:52ch}
+    .film-head{max-width:720px}
+    .cmp{margin-top:clamp(28px,4vw,44px);overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r);border:1px solid rgba(255,255,255,.22);background:rgba(0,27,63,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    .cmp-table{width:100%;border-collapse:collapse;color:#fff;font-size:.95rem;line-height:1.55;table-layout:fixed}
+    .cmp-table th,.cmp-table td{padding:16px 18px;vertical-align:top;text-align:left;border-top:1px solid rgba(255,255,255,.14)}
+    .cmp-table thead th,.cmp-table thead td{border-top:none;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.72);padding-top:18px;padding-bottom:14px}
+    .cmp-table thead th.us{color:#fff}
+    .cmp-table tbody th{font-family:var(--disp);font-weight:500;font-size:1.02rem;color:#fff;width:22%}
+    .cmp-table tbody td{color:rgba(255,255,255,.74);width:34%}
+    .cmp-table td.us,.cmp-table th.us{background:rgba(156,211,202,.12);color:#fff;width:44%}
+    .cmp-table td.us{position:relative;padding-left:40px}
+    .cmp-table td.us::before{content:"";position:absolute;left:18px;top:22px;width:12px;height:7px;border-left:2px solid var(--support);border-bottom:2px solid var(--support);transform:rotate(-45deg)}
+    .cmp-table .tflag{display:inline-block;margin-left:10px;padding:3px 8px;border-radius:999px;background:var(--support);color:var(--navy);font-size:.62rem;letter-spacing:.12em;vertical-align:1px}
+    .cmp-table td[data-l]::after{display:none}
+    .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
     /* ============ 4. modalities: numbered plates ============ */
     .plates{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.6vw,26px);margin-top:clamp(36px,5vw,54px)}
@@ -428,6 +442,17 @@
       .ledger-row .tag{grid-column:2;justify-self:start}
       .form{grid-template-columns:1fr}
       .rv-grid{grid-template-columns:1fr}
+      .cmp-table,.cmp-table tbody,.cmp-table tr,.cmp-table th,.cmp-table td{display:block;width:auto}
+      .cmp-table thead{display:none}
+      .cmp-table tr{border-top:1px solid rgba(255,255,255,.18);padding:6px 0 10px}
+      .cmp-table tr:first-child{border-top:none}
+      .cmp-table tbody th{border-top:none;padding:14px 18px 4px;width:auto}
+      .cmp-table tbody td{border-top:none;padding:6px 18px 6px 74px;position:relative;width:auto}
+      .cmp-table td[data-l]::before{content:attr(data-l);position:absolute;left:18px;top:8px;width:44px;height:auto;border:0;transform:none;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.55);line-height:1.6}
+      .cmp-table td.us,.cmp-table th.us{background:transparent;padding-left:74px;width:auto}
+      .cmp-table{table-layout:auto}
+      .cmp-table td.us::before{color:var(--support)}
+      .cmp-table td.us{color:#fff}
       .hero-visual{margin-left:0}
       .scope{left:auto;right:-8px;bottom:-38px;width:170px}
       .offer-media{min-height:280px}
@@ -556,10 +581,52 @@
     <video src="assets/clinic-film-1600x900.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
     <img class="fallback kb" src="assets/treatment-room-1600x900.jpg" width="1600" height="900" alt="The Biohackr Health treatment lounge: black leather recliners, sheer curtain dividers, and a brass ring chandelier" loading="lazy" decoding="async">
     <div class="wrap film-copy">
-      <p class="kicker on-dark reveal">Inside the program</p>
-      <!-- SWAP: film heading + line -->
-      <h2 id="film-h" class="reveal" style="--d:.07s">Hair restoration designed for Bay Area innovators</h2>
-      <p class="reveal" style="--d:.14s">Regenerative treatment, prescription support, and honest measurement, delivered in a clinic that treats the follicle like an organ worth studying.</p>
+      <div class="film-head">
+        <p class="kicker on-dark reveal">Why here, not the obvious alternative</p>
+        <!-- SWAP: film heading + line -->
+        <h2 id="film-h" class="reveal" style="--d:.07s">A mail-order hair kit is not a hair clinic.</h2>
+        <p class="reveal" style="--d:.14s">Plenty of places will sell you something for hair loss. The difference is whether anyone examined your scalp first, what they can offer beyond a pill, and whether progress is measured against your own baseline.</p>
+      </div>
+      <!-- SWAP: comparison table copy. Generic categories only (no named competitors); no efficacy claims. -->
+      <div class="cmp reveal" style="--d:.2s" role="region" aria-label="How Biohackr Health compares with a subscription box or a walk-in pop-up" tabindex="0">
+        <table class="cmp-table">
+          <caption class="vh">How Biohackr Health compares with a subscription box or a walk-in pop-up</caption>
+          <thead>
+            <tr>
+              <td></td>
+              <th scope="col">A subscription box or walk-in pop-up</th>
+              <th scope="col" class="us">Biohackr Health<span class="tflag">The clinic</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">The exam</th>
+              <td data-l="Them">An online quiz decides your plan.</td>
+              <td data-l="Us" class="us">A nurse examines your scalp in person, under magnification, before anything is recommended.</td>
+            </tr>
+            <tr>
+              <th scope="row">The toolkit</th>
+              <td data-l="Them">One product for everyone, shipped in a box.</td>
+              <td data-l="Us" class="us">RF microneedling, Age Zero exosomes, PRP, and prescription support, matched to your follicles.</td>
+            </tr>
+            <tr>
+              <th scope="row">Who is in charge</th>
+              <td data-l="Them">Whoever answers the chat, if anyone.</td>
+              <td data-l="Us" class="us">Licensed clinicians in our San Francisco and Palo Alto clinics, every visit.</td>
+            </tr>
+            <tr>
+              <th scope="row">Measurement</th>
+              <td data-l="Them">You judge it in the bathroom mirror.</td>
+              <td data-l="Us" class="us">Baseline photos at the consult, then progress judged against your own images.</td>
+            </tr>
+            <tr>
+              <th scope="row">The money</th>
+              <td data-l="Them">A subscription that quietly renews.</td>
+              <td data-l="Us" class="us">Prices in writing at your free consult. No obligation to book treatment.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
