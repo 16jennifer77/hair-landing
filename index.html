@@ -103,6 +103,12 @@
       display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:var(--r);
       background:var(--accent);color:#fff;font-weight:600;font-size:.98rem;text-decoration:none;
       border:1px solid var(--accent);transition:background .2s ease,transform .2s ease,box-shadow .2s ease;
+      position:relative;overflow:hidden;
+    }
+    @media (prefers-reduced-motion:no-preference){
+      .btn::after{content:"";position:absolute;top:-4px;bottom:-4px;left:-38%;width:30%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.32),transparent);transform:skewX(-18deg)}
+      .btn:hover::after{animation:sheen .85s ease}
+      @keyframes sheen{to{left:130%}}
     }
     .btn svg{width:18px;height:18px;transition:transform .2s ease}
     .btn:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-2px);box-shadow:0 10px 24px rgba(224,25,25,.18)}
@@ -163,46 +169,28 @@
       position:absolute;top:18px;left:18px;z-index:2;background:rgba(255,253,249,.92);border:1px solid var(--hair);
       border-radius:var(--r);padding:8px 13px;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);
     }
-    /* signature: follicle section scope (single follicle, serum uptake loop) */
+    /* signature: scope viewport (real treatment macro under the lens) */
     .scope{
       position:absolute;bottom:-42px;left:-46px;width:clamp(190px,20vw,236px);aspect-ratio:1;
       background:var(--white);border:1px solid var(--hair);border-radius:50%;
-      box-shadow:0 18px 44px rgba(0,27,63,.14);display:grid;place-items:center;z-index:3;
+      box-shadow:0 18px 44px rgba(0,27,63,.18);padding:9px;z-index:3;
     }
-    .scope svg{width:82%;height:82%;display:block}
-    .scope .ring-t{stroke:var(--hair);stroke-width:1}
-    .scope .tick{stroke:var(--navy);stroke-width:1.4}
-    .scope .derm{stroke:var(--navy);stroke-width:1.3;fill:none;opacity:.55}
-    .scope .shaft{stroke:var(--navy);stroke-width:2;stroke-linecap:round;fill:none}
-    .scope .canal{stroke:var(--navy);stroke-width:1.4;stroke-linecap:round;fill:none}
-    .scope .bulb{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}
-    .scope .papilla{fill:none;stroke:var(--accent);stroke-width:1;opacity:.7}
-    .scope .drop{fill:var(--accent);opacity:0}
-    .scope .glow{fill:var(--accent);opacity:0}
-    .js .scope.drawn .drop{animation:uptake 4.6s ease-in-out .4s infinite}
-    .js .scope.drawn .glow{animation:absorb 4.6s ease-in-out .4s infinite}
-    @keyframes uptake{
-      0%,8%{transform:translateY(0);opacity:0}
-      14%{opacity:1}
-      52%{transform:translateY(33px);opacity:1}
-      60%,100%{transform:translateY(33px);opacity:0}
-    }
-    @keyframes absorb{
-      0%,48%{opacity:0}
-      58%{opacity:.5}
-      74%,100%{opacity:0}
-    }
+    .scope .port{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden}
+    .scope .port img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05) brightness(.98)}
+    .scope .port svg{position:absolute;inset:0;width:100%;height:100%}
+    .scope .ring-t{stroke:rgba(255,255,255,.42);stroke-width:1;fill:none}
+    .scope .tick{stroke:rgba(255,255,255,.85);stroke-width:1.4}
+    .scope .sweep{stroke:var(--accent);stroke-width:2.4;fill:none;stroke-linecap:round;opacity:.9}
     .scope-label{
-      position:absolute;inset:auto 0 13% 0;text-align:center;font-size:.56rem;font-weight:600;
-      letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+      position:absolute;left:50%;bottom:8.5%;transform:translateX(-50%);white-space:nowrap;
+      background:rgba(0,27,63,.8);color:#fff;border-radius:999px;padding:6px 13px;
+      font-size:.54rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
     }
     @media (prefers-reduced-motion:no-preference){
       .scope{animation:breathe 7s ease-in-out infinite}
       @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
-    }
-    @media (prefers-reduced-motion:reduce){
-      .js .scope.drawn .drop,.js .scope.drawn .glow{animation:none}
-      .scope .glow{opacity:.3}
+      .scope .sweep{transform-origin:50% 50%;animation:sweep 9s linear infinite}
+      @keyframes sweep{to{transform:rotate(360deg)}}
     }
 
     /* ============ 2. credentials strip ============ */
@@ -260,7 +248,12 @@
 
     /* ============ 6. stat band ============ */
     .stats{background:var(--navy);color:#fff;position:relative;overflow:clip}
-    .stats::before{content:"";position:absolute;inset:0;background:radial-gradient(52% 60% at 88% 0%,rgba(224,25,25,.14),transparent 70%)}
+    .stats::before{content:"";position:absolute;inset:-25%;background:radial-gradient(30% 34% at 76% 18%,rgba(224,25,25,.15),transparent 70%),radial-gradient(24% 28% at 18% 86%,rgba(156,211,202,.07),transparent 70%)}
+    @media (prefers-reduced-motion:no-preference){
+      .stats::before{animation:glow-drift 19s ease-in-out infinite alternate}
+      footer::before{animation:glow-drift 23s ease-in-out infinite alternate-reverse}
+      @keyframes glow-drift{from{transform:translate(0,0)}to{transform:translate(4%,-3%)}}
+    }
     .stats h2{color:#fff}
     .stats .wrap{position:relative}
     .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(22px,4vw,44px);margin-top:clamp(30px,4vw,44px)}
@@ -364,20 +357,31 @@
     .form-done b{color:var(--support-deep)}
 
     /* ============ 13. footer ============ */
-    footer{background:var(--navy);color:rgba(255,255,255,.78);padding:clamp(60px,7vw,86px) 0 34px;font-size:.92rem}
+    footer{position:relative;overflow:clip;background:var(--navy);color:rgba(255,255,255,.78);padding:clamp(60px,7vw,86px) 0 34px;font-size:.92rem}
+    footer::before{content:"";position:absolute;inset:-20%;background:radial-gradient(30% 34% at 18% 14%,rgba(224,25,25,.15),transparent 70%),radial-gradient(26% 30% at 82% 84%,rgba(156,211,202,.09),transparent 70%)}
+    footer .wrap{position:relative}
     footer a{color:#fff;text-decoration:none;border-bottom:1px solid var(--hair-light);transition:border-color .2s}
     footer a:hover{border-color:var(--accent)}
-    .foot-grid{display:grid;grid-template-columns:2fr 1fr;gap:clamp(28px,5vw,60px);padding-bottom:44px;border-bottom:1px solid var(--hair-lighter)}
+    .foot-cta{display:grid;grid-template-columns:1fr auto;align-items:center;gap:clamp(24px,4vw,56px);padding-bottom:clamp(36px,5vw,54px);border-bottom:1px solid var(--hair-lighter)}
+    .foot-cta h2{color:#fff;font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:16ch}
+    .foot-cta-act{display:grid;gap:16px;justify-items:start}
+    .foot-cta .btn{border-bottom:1px solid var(--accent)}
+    .foot-cta .btn:hover{border-color:var(--accent-deep)}
+    .foot-tel{font-family:var(--disp);font-weight:600;font-size:clamp(1.3rem,2.2vw,1.7rem);border-bottom:none !important}
+    .foot-mid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:clamp(22px,3.5vw,40px);padding:clamp(36px,5vw,50px) 0;border-bottom:1px solid var(--hair-lighter)}
     .foot-brand .brand{border-bottom:none}
     .foot-brand .brand img{height:32px}
-    .foot-brand p{margin-top:14px;font-size:.9rem;color:rgba(255,255,255,.6);max-width:38ch}
-    .foot-col h4{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px}
-    .foot-col ul{list-style:none;display:grid;gap:10px}
-    .foot-loc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);padding:38px 0;border-bottom:1px solid var(--hair-lighter)}
-    .foot-loc b{display:block;color:#fff;margin-bottom:8px;font-size:.98rem}
-    .foot-loc address{font-style:normal;color:rgba(255,255,255,.62);margin-bottom:12px}
-    .foot-loc ul{list-style:none;display:grid;gap:4px;font-size:.84rem;color:rgba(255,255,255,.5)}
-    .foot-loc ul li{display:flex;justify-content:space-between;max-width:280px}
+    .foot-brand p{margin-top:16px;font-size:.9rem;color:rgba(255,255,255,.6);max-width:34ch}
+    .loc-card{border:1px solid var(--hair-light);border-radius:var(--r);padding:22px 22px 20px;background:rgba(255,255,255,.03)}
+    .loc-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .loc-head b{color:#fff;font-size:1rem}
+    .loc-tag{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--support)}
+    .loc-card address{font-style:normal;color:rgba(255,255,255,.62);margin-bottom:13px;line-height:1.55}
+    .loc-card ul{list-style:none;display:grid;gap:5px;font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:16px}
+    .loc-card ul li{display:flex;justify-content:space-between;gap:12px}
+    .loc-dir{display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+    .loc-dir svg{width:12px;height:12px;transition:transform .2s ease}
+    .loc-dir:hover svg{transform:translate(2px,-2px)}
     .foot-bottom{padding-top:30px;display:grid;gap:14px;text-align:center}
     .foot-bottom p{font-size:.78rem;color:rgba(255,255,255,.44);max-width:76ch;margin:0 auto;line-height:1.7}
 
@@ -406,7 +410,8 @@
       .hero-visual{margin-left:0}
       .scope{left:auto;right:-8px;bottom:-38px;width:170px}
       .offer-media{min-height:280px}
-      .foot-grid,.foot-loc{grid-template-columns:1fr}
+      .foot-cta{grid-template-columns:1fr}
+      .foot-mid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -490,33 +495,23 @@
           <img class="fallback" src="assets/hero-steps-poster-1000x1240.jpg" width="1000" height="1240" alt="A gloved Biohackr clinician holding the gold RF microneedling handpiece at a patient's hairline" fetchpriority="high">
           <figcaption class="hero-tag">In clinic. Nurse performed.</figcaption>
         </figure>
-        <!-- Signature: single-follicle section. A serum drop enters the canal, travels to the
-             bulb, and the bulb glows as it absorbs. Loop gated on .drawn (in view). -->
+        <!-- Signature: scope viewport. Real macro frame from the hair shoot (C9391, red-lit
+             cartridge in the hair) inside a circular lens with ticks and a slow scanning arc. -->
         <div class="scope" aria-hidden="true">
-          <svg viewBox="0 0 120 120">
-            <circle class="ring-t" cx="60" cy="60" r="56" fill="none"/>
-            <circle class="ring-t" cx="60" cy="60" r="47" fill="none"/>
-            <line class="tick" x1="60" y1="4" x2="60" y2="11"/>
-            <line class="tick" x1="60" y1="109" x2="60" y2="116"/>
-            <line class="tick" x1="4" y1="60" x2="11" y2="60"/>
-            <line class="tick" x1="109" y1="60" x2="116" y2="60"/>
-            <!-- skin surface, two dermal lines -->
-            <path class="derm" d="M22 42 C40 38 80 38 98 42"/>
-            <path class="derm" d="M24 50 C42 46 78 46 96 50"/>
-            <!-- hair shaft above the surface -->
-            <path class="shaft" d="M60 40 C58 32 62 24 59 15"/>
-            <!-- follicle canal walls narrowing to the bulb -->
-            <path class="canal" d="M55.5 44 C54.5 58 54.5 70 56 78"/>
-            <path class="canal" d="M64.5 44 C65.5 58 65.5 70 64 78"/>
-            <!-- bulb + dermal papilla -->
-            <ellipse class="bulb" cx="60" cy="85" rx="7" ry="8"/>
-            <path class="papilla" d="M56.5 90 C58 86.5 62 86.5 63.5 90"/>
-            <!-- serum drop (travels down the canal) + absorption glow -->
-            <ellipse class="glow" cx="60" cy="85" rx="10.5" ry="11.5"/>
-            <circle class="drop" cx="60" cy="47" r="2.5"/>
-          </svg>
+          <div class="port">
+            <img src="assets/scope-macro-640.jpg" width="640" height="640" alt="" loading="lazy" decoding="async">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring-t" cx="60" cy="60" r="54"/>
+              <circle class="ring-t" cx="60" cy="60" r="44"/>
+              <line class="tick" x1="60" y1="2" x2="60" y2="9"/>
+              <line class="tick" x1="60" y1="111" x2="60" y2="118"/>
+              <line class="tick" x1="2" y1="60" x2="9" y2="60"/>
+              <line class="tick" x1="111" y1="60" x2="118" y2="60"/>
+              <circle class="sweep" cx="60" cy="60" r="54" pathLength="100" stroke-dasharray="12 88"/>
+            </svg>
+          </div>
           <!-- SWAP: scope label -->
-          <span class="scope-label">Follicle uptake 20x</span>
+          <span class="scope-label">Under the scope</span>
         </div>
       </div>
     </div>
@@ -805,38 +800,39 @@
 
 <footer>
   <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
+    <div class="foot-cta">
+      <!-- SWAP: footer CTA -->
+      <h2 class="reveal">Ready when your follicles are.</h2>
+      <div class="foot-cta-act reveal" style="--d:.08s">
+        <a class="btn" href="#start">Book my free consult <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="foot-tel" href="tel:+16503701588">(650) 370-1588</a>
+      </div>
+    </div>
+    <div class="foot-mid">
+      <div class="foot-brand reveal">
         <a class="brand" href="#top"><img src="assets/logo-biohackr-health-white.png" width="455" height="76" alt="Biohackr Health"></a>
         <!-- SWAP: footer blurb -->
         <p>Physician-led hair restoration, NAD+, hormone, and longevity therapies from the original biohacking clinic. Two Bay Area locations.</p>
       </div>
-      <div class="foot-col">
-        <h4>Contact</h4>
-        <!-- SWAP: contact -->
-        <ul>
-          <li><a href="tel:+16503701588">(650) 370-1588</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-loc">
       <!-- SWAP: location 1 -->
-      <div class="loc">
-        <b>San Francisco</b>
-        <address><a href="https://goo.gl/maps/8pzTGUEau1jUC3kdA" target="_blank" rel="noopener">1877 Union Street<br>San Francisco, CA 94123</a></address>
+      <div class="loc-card reveal" style="--d:.07s">
+        <div class="loc-head"><b>San Francisco</b><span class="loc-tag">Marina</span></div>
+        <address>1877 Union Street<br>San Francisco, CA 94123</address>
         <ul>
           <li><span>Mon to Fri</span><span>10:00 AM to 6:00 PM</span></li>
           <li><span>Saturday</span><span>10:00 AM to 4:00 PM</span></li>
         </ul>
+        <a class="loc-dir" href="https://goo.gl/maps/8pzTGUEau1jUC3kdA" target="_blank" rel="noopener">Get directions <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
       <!-- SWAP: location 2 -->
-      <div class="loc">
-        <b>Palo Alto</b>
-        <address><a href="https://goo.gl/maps/CsZk6nJtbnXJgPLYA" target="_blank" rel="noopener">540 Bryant Street<br>Palo Alto, CA 94301</a></address>
+      <div class="loc-card reveal" style="--d:.14s">
+        <div class="loc-head"><b>Palo Alto</b><span class="loc-tag">Downtown</span></div>
+        <address>540 Bryant Street<br>Palo Alto, CA 94301</address>
         <ul>
           <li><span>Mon to Fri</span><span>10:30 AM to 6:00 PM</span></li>
           <li><span>Saturday</span><span>10:00 AM to 4:00 PM</span></li>
         </ul>
+        <a class="loc-dir" href="https://goo.gl/maps/CsZk6nJtbnXJgPLYA" target="_blank" rel="noopener">Get directions <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
     <div class="foot-bottom">
