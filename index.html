@@ -138,11 +138,11 @@
     .nav-cta:hover{background:var(--navy-2);transform:translateY(-1px)}
     .menu-btn{display:none;background:none;border:1px solid var(--hair);border-radius:var(--r);padding:9px 11px;cursor:pointer;color:var(--ink)}
     .menu-btn svg{width:20px;height:20px;display:block}
-    .m-nav{position:fixed;inset:var(--header-h) 0 0 0;background:var(--paper);z-index:99;display:none;padding:34px 26px;border-top:1px solid var(--hair)}
+    .m-nav{position:fixed;top:var(--header-h);left:0;right:0;bottom:0;height:calc(100dvh - var(--header-h));overflow-y:auto;background:var(--paper);z-index:99;display:none;padding:34px 26px;border-top:1px solid var(--hair)}
     .m-nav.open{display:block}
     .m-nav ul{list-style:none;display:grid;gap:6px}
     .m-nav a{display:block;padding:16px 4px;font-size:1.25rem;font-family:var(--disp);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--hair-soft)}
-    .m-nav .nav-cta{margin-top:22px;justify-content:center;display:flex;font-size:1rem;padding:16px}
+    .m-nav .nav-cta{margin-top:22px;justify-content:center;display:flex;font-size:1rem;padding:16px;color:#fff;font-family:var(--body);border-bottom:none}
 
     /* ============ 1. hero ============ */
     .hero{position:relative;padding:clamp(35px,4.5vw,60px) 0 clamp(86px,11vw,140px);overflow:clip}
@@ -212,7 +212,7 @@
       @keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
     }
     .film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,27,63,.14) 0%,rgba(0,27,63,.72) 82%)}
-    .film-copy{position:relative;z-index:2;padding:clamp(60px,8vw,96px) 0}
+    .film-copy{position:relative;z-index:2;padding:clamp(60px,8vw,96px) 26px}
     .film-copy h2{color:#fff}
     .film-copy p{color:rgba(255,255,255,.82);margin-top:14px;max-width:52ch}
 
@@ -288,12 +288,12 @@
     .quote cite{display:block;margin-top:22px;font-style:normal;font-size:.8rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
     /* ============ 9. clinic rail ============ */
-    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(340px,78vw);gap:clamp(16px,2.4vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;padding:clamp(30px,4vw,44px) 26px 12px;max-width:1160px;margin:0 auto;scrollbar-width:thin}
-    .rail figure{scroll-snap-align:start;margin:0}
+    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(340px,78vw);gap:clamp(16px,2.4vw,24px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:26px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:clamp(30px,4vw,44px) 26px 12px;max-width:1160px;margin:0 auto;scrollbar-width:thin}
+    .rail figure{scroll-snap-align:start;scroll-snap-stop:always;margin:0}
     .rail .media{border-radius:var(--r);overflow:hidden;border:1px solid var(--hair)}
     .rail img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06);transition:transform .5s ease}
-    .rail figure:hover img{transform:scale(1.03)}
-    @media (prefers-reduced-motion:no-preference){
+    @media (hover:hover){.rail figure:hover img{transform:scale(1.03)}}
+    @media (prefers-reduced-motion:no-preference) and (hover:hover){
       .rail .media{transition:transform .45s ease,box-shadow .45s ease}
       .rail figure:hover .media{transform:translateY(-5px);box-shadow:0 16px 34px rgba(0,27,63,.12)}
     }
@@ -312,10 +312,19 @@
     .principles p{font-size:.94rem;color:var(--muted)}
 
     /* ============ 11. Google reviews ============ */
+    #consult{scroll-margin-top:calc(var(--header-h) + 14px)}
     .g-reviews .wrap{text-align:center}
     .g-reviews .kicker{justify-content:center}
     /* max-width guards against the widget helper script assigning a fixed pixel width */
-    .g-reviews iframe{display:block;width:100%;max-width:100% !important;min-height:360px;border:0;border-radius:var(--r);margin-top:clamp(26px,3.5vw,40px)}
+    .rv-agg{margin-top:18px;font-size:.95rem;color:var(--muted)}
+    .rv-agg b{color:var(--ink)}
+    .rv-agg-stars{color:#e8a317;letter-spacing:.08em;margin-right:10px;font-size:1.05rem;vertical-align:-1px}
+    .rv-grid{list-style:none;margin:clamp(26px,3.5vw,40px) auto 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,22px);text-align:left;max-width:1160px}
+    .rv-card{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(20px,2.4vw,28px);display:flex;flex-direction:column;gap:12px}
+    .rv-stars{color:#e8a317;letter-spacing:.1em;font-size:1rem}
+    .rv-text{font-size:.95rem;line-height:1.6;color:var(--ink);display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+    .rv-meta{margin-top:auto;padding-top:12px;border-top:1px solid var(--hair-soft);font-size:.8rem;color:var(--faint);display:flex;flex-direction:column;gap:2px}
+    .rv-meta b{color:var(--ink);font-weight:600;font-size:.86rem}
     .g-reviews .g-link{display:inline-block;margin-top:26px;font:600 .72rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--navy);border:1px solid var(--hair);padding:14px 22px;border-radius:var(--r);text-decoration:none;transition:border-color .25s}
     .g-reviews .g-link:hover{border-color:var(--accent)}
 
@@ -345,9 +354,18 @@
     .form .full{grid-column:1/-1}
     .form label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:7px}
     .form input,.form select{
-      width:100%;padding:13px 14px;border:1px solid var(--hair);border-radius:var(--r);background:var(--paper);
-      font-family:var(--body);font-size:.96rem;color:var(--ink);transition:border-color .2s;
+      width:100%;box-sizing:border-box;height:50px;padding:0 14px;line-height:48px;border:1px solid var(--hair);border-radius:var(--r);background:var(--paper);
+      font-family:var(--body);font-size:.96rem;color:var(--ink);transition:border-color .2s;margin:0;
+      -webkit-appearance:none;appearance:none;box-shadow:none;
     }
+    .form select{
+      padding-right:42px;cursor:pointer;
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%23323f64' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+      background-repeat:no-repeat;background-position:right 15px center;background-size:14px 9px;
+      text-overflow:ellipsis;white-space:nowrap;overflow:hidden;
+    }
+    .form select:invalid{color:var(--faint)}
+    .form select option{color:var(--ink)}
     .form input:hover,.form select:hover{border-color:var(--ink-2)}
     .form input:focus-visible,.form select:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
     .form .btn{width:100%;justify-content:center;margin-top:4px}
@@ -391,6 +409,7 @@
       .plates{grid-template-columns:1fr 1fr}
       .stat-grid{grid-template-columns:1fr 1fr;gap:30px}
       .creds-row{grid-template-columns:1fr 1fr}
+      .rv-grid{grid-template-columns:1fr 1fr}
       .creds-row li:nth-child(3){border-left:none}
       .creds-row li{border-top:1px solid var(--hair-soft)}
       .creds-row li:nth-child(-n+2){border-top:none}
@@ -407,6 +426,7 @@
       .ledger-row p{grid-column:2}
       .ledger-row .tag{grid-column:2;justify-self:start}
       .form{grid-template-columns:1fr}
+      .rv-grid{grid-template-columns:1fr}
       .hero-visual{margin-left:0}
       .scope{left:auto;right:-8px;bottom:-38px;width:170px}
       .offer-media{min-height:280px}
@@ -452,6 +472,7 @@
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
   </nav>
+</header>
   <div class="m-nav" id="m-nav">
     <ul>
       <li><a href="#protocol">Protocol</a></li>
@@ -461,7 +482,6 @@
     </ul>
     <a class="nav-cta" href="#start">Book my free consult</a>
   </div>
-</header>
 
 <main id="main">
 
@@ -721,11 +741,46 @@
       <p class="kicker reveal">From our Google reviews</p>
       <!-- SWAP: heading -->
       <h2 id="reviews-h" class="reveal" style="--d:.07s">What patients say about us</h2>
-      <!-- Live reviews: the clinic's GHL/LeadConnector reviews widget (same widget the botox LP
-           embeds, vscbiVBPwkbdhVINAGjF). Pulls the SF location's synced Google reviews and
-           updates automatically as new reviews are written. -->
-      <iframe id="msgsndr_reviews" class="reveal" title="Biohackr Health Google reviews" src="https://backend.leadconnectorhq.com/appengine/reviews/get_widget/vscbiVBPwkbdhVINAGjF" frameborder="0" scrolling="auto" loading="lazy"></iframe>
-      <a class="g-link reveal" style="--d:.14s" href="https://www.google.com/search?q=biohackr+health#lrd=0x808581657af64d31:0x1a2a2a9bc73a82fc,1,,," target="_blank" rel="noopener">Read all our reviews on Google</a>
+      <!-- Live Google reviews: first FOUR text reviews from the clinic's GHL/LeadConnector reviews
+           widget (vscbiVBPwkbdhVINAGjF, same source the botox LP uses). Markup below is baked from the
+           live data at build time; on load the page refetches the widget (CORS-open) and refreshes
+           the four cards + the aggregate line, so it stays current without ever showing more than four. -->
+      <p class="rv-agg reveal" style="--d:.1s"><span class="rv-agg-stars" aria-hidden="true">★★★★★</span><b id="rv-rating">4.9</b> average from <b id="rv-count">48</b> Google reviews</p>
+      <ul id="rv-list" class="rv-grid reveal" style="--d:.14s">
+        <li class="rv-card">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">I love sweet Nurse Lindsey Ann! Will keep coming to see her! So many fabulous services. The space is clean, and I feel super well taken care of by the kind team! Super competent nurse who had tons of knowledge to educate me. Sounds like there are so many more things to discover here as I bio hack my way back to health. Will keep coming back! Thanks again for the best care!!!</p>
+          <div class="rv-meta"><b>Christie Bui</b><span>Google · Aug 2024</span></div>
+        </li>
+        <li class="rv-card">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">This place is nothing short of amazing!! I feel fantastic and everyone is so nice and accommodating! I’ve had to bring my kiddos with me a few times and they were so sweet to my boys! 10/10</p>
+          <div class="rv-meta"><b>Jessica Entzel</b><span>Google · Jun 2024</span></div>
+        </li>
+        <li class="rv-card">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">Hands down my favorite med spa in SF. The team is fantastic; I&#x27;ve never had a bad experience with anyone there. Nurse Lindsey is the best--she&#x27;s super knowledgeable on all of their treatments and always works with me to ensure I&#x27;m getting the right ones for my needs and receiving the best care. Paulina, the patient care coordinator, is awesome, super friendly and helpful and always very accommodating of my hectic schedule.</p>
+          <div class="rv-meta"><b>Ariana Fariab</b><span>Google · Jun 2024</span></div>
+        </li>
+        <li class="rv-card">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">I recently had the pleasure of visiting Biohackr on Union Street, and I must say, it was an exceptional experience from start to finish. Lindsey, the genius behind this innovative wellness hub, truly stands out as a beacon of knowledge and expertise in the biohacking community.
+
+From the moment I walked in, I was welcomed with a warm and friendly atmosphere that immediately put me at ease. The space itself is modern, clean, and equipped with the latest in health and wellness technology. It&#x27;s clear that a lot of thought and care has gone into making Biohackr not just a service, but a holistic experience.
+
+Lindsey&#x27;s approach is both professional and deeply personalized. She takes the time to understand your unique needs and goals, offering tailored advice and cutting-edge solutions that are truly transformative. Whether you&#x27;re looking to optimize your physical performance, enhance mental clarity, or simply improve your overall well-being, Lindsey&#x27;s wealth of knowledge and innovative techniques are unmatched.
+
+During my visit, I opted for the Beauty IV and Immunity IV treatments. The Beauty IV left my skin glowing and revitalized, giving me a noticeable boost in both appearance and confidence. The Immunity IV was equally impressive, fortifying my immune system and leaving me feeling robust and energized. Lindsey&#x27;s expertise and careful administration of these IV therapies ensured I received maximum benefits with minimal discomfort.
+
+What really sets Lindsey and Biohackr apart is the genuine passion and dedication to helping clients achieve their best selves. Lindsey&#x27;s enthusiasm for biohacking is contagious, and her commitment to staying at the forefront of wellness technology is evident in every aspect of her practice.
+
+In short, if you&#x27;re on Union Street and looking for a place to elevate your health and well-being, Biohackr is an absolute must-visit. Lindsey&#x27;s expertise, coupled with the state-of-the-art facilities, makes for an unparalleled experience that will leave you feeling empowered and revitalized. Five stars just aren&#x27;t enough to express how incredible this place truly is!
+
+Also their acne products WORK.</p>
+          <div class="rv-meta"><b>Isabella Hernandez</b><span>Google · Jun 2024</span></div>
+        </li>
+      </ul>
+      <a class="g-link reveal" style="--d:.2s" href="https://www.google.com/search?q=biohackr+health#lrd=0x808581657af64d31:0x1a2a2a9bc73a82fc,1,,," target="_blank" rel="noopener">Read all our reviews on Google</a>
     </div>
   </section>
 
@@ -735,11 +790,11 @@
       <div class="offer-card reveal">
         <div class="offer-media">
           <!-- SWAP: offer image -->
-          <img src="assets/reception-desk-raw-928x1160.jpg" width="928" height="1160" alt="The Biohackr Health reception desk beneath the navy wall sign on a walnut slat wall" loading="lazy" decoding="async">
+          <img src="assets/reception-team-928x1160.jpg" width="928" height="1160" alt="Two Biohackr Health front-desk team members laughing together at the reception desk beneath the navy wall sign" loading="lazy" decoding="async">
           <!-- SWAP: badge -->
           <span class="offer-badge">20 spots this month</span>
         </div>
-        <div class="offer-body">
+        <div class="offer-body" id="consult">
           <p class="kicker">Start with a consult</p>
           <!-- SWAP: offer heading -->
           <h2 id="offer-h">Free nurse hair consult</h2>
@@ -912,12 +967,40 @@
     stats.forEach(function(b){io.observe(b)});
   })();
 
-  /* GHL reviews widget helper (auto-sizes the #msgsndr_reviews iframe). Loaded dynamically. */
+  /* Mobile: any link to #start lands on the "Start with a consult" copy, not the offer photo above it. */
   (function(){
-    var rw=document.createElement('script');
-    rw.src='https://apisystem.tech/js/reviews_widget.js';
-    rw.defer=true;
-    document.body.appendChild(rw);
+    var target=document.getElementById('consult'); if(!target)return;
+    document.querySelectorAll('a[href="#start"]').forEach(function(a){
+      a.addEventListener('click',function(e){
+        if(!window.matchMedia('(max-width:960px)').matches)return;
+        e.preventDefault();
+        var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+        requestAnimationFrame(function(){
+          var hh=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h'))||70;
+          var y=0,el=target; while(el){y+=el.offsetTop||0; el=el.offsetParent} y-=(hh+14); /* offsetTop ignores the .reveal entrance transform */
+          window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
+          if(history.replaceState)history.replaceState(null,'','#start');
+        });
+      });
+    });
+  })();
+
+  /* Google reviews: refresh the four baked cards from the live GHL widget data (CORS-open). Never shows more than four. */
+  (function(){
+    var list=document.getElementById('rv-list'); if(!list||!window.fetch)return;
+    fetch('https://backend.leadconnectorhq.com/appengine/reviews/get_widget/vscbiVBPwkbdhVINAGjF',{mode:'cors'}).then(function(r){return r.text()}).then(function(t){
+      var m=t.match(/window\.__SSR_DATA__ = (\{[\s\S]*?\});?\s*<\/script>/); if(!m)return;
+      var d=JSON.parse(m[1]); var revs=(d.reviews||[]).filter(function(r){return r.comment&&r.comment.trim()}).slice(0,4); if(revs.length<4)return;
+      var agg=d.aggregateData||{}; var rt=document.getElementById('rv-rating'), rc=document.getElementById('rv-count');
+      if(agg.totalRating&&rt)rt.textContent=agg.totalRating; if(agg.totalReviews&&rc)rc.textContent=agg.totalReviews;
+      var mons=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var cards=list.querySelectorAll('.rv-card');
+      revs.forEach(function(r,i){var c=cards[i]; if(!c)return; var n=Math.max(0,Math.min(5,Math.round(r.starRating||5)));
+        c.querySelector('.rv-stars').textContent='\u2605'.repeat(n)+'\u2606'.repeat(5-n);
+        c.querySelector('.rv-text').textContent=r.comment.trim();
+        var dt=new Date(r.dateAdded); c.querySelector('.rv-meta b').textContent=r.reviewerName||'Google user';
+        c.querySelector('.rv-meta span').textContent='Google \u00b7 '+(isNaN(dt)?'':mons[dt.getMonth()]+' '+dt.getFullYear());});
+    }).catch(function(){});
   })();
 
   /* Form: demo submit, shows confirmation. Wire action to the real webhook before ads run. */
