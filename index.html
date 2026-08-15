@@ -28,7 +28,7 @@
    8 | pull quote         | 11 editorial quote       |                       | oversized quote mark        | 40
    9 | clinic rail        | 6 scroll-snap rail       | INSIDE THE CLINIC     | captioned rail              | 50
   10 | honest approach    | 7 sticky side            | OUR APPROACH          | 90deg side label            | 150
-  11 | FAQ                | accordion rows           | QUESTIONS             | plus accordion              | 190
+  11 | Google reviews     | live GHL reviews widget  | FROM OUR GOOGLE       | auto-synced SF reviews      | 190
   12 | CTA offer + form   | split offer card         | START WITH A CONSULT  | photo + spots badge         | 110
   13 | footer             | rich footer              |                       | 2 locations + compliance    | 140
 -->
@@ -92,6 +92,10 @@
       font-size:.68rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
     }
     .kicker::before{content:"";width:26px;height:2px;background:var(--accent)}
+    @media (prefers-reduced-motion:no-preference){
+      .js .kicker.reveal::before{width:0;transition:width .7s cubic-bezier(.17,.67,.3,1) .35s}
+      .js .kicker.reveal.in::before{width:26px}
+    }
     .kicker.on-dark{color:var(--support)}
     .kicker.on-dark::before{background:var(--support)}
 
@@ -159,7 +163,7 @@
       position:absolute;top:18px;left:18px;z-index:2;background:rgba(255,253,249,.92);border:1px solid var(--hair);
       border-radius:var(--r);padding:8px 13px;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);
     }
-    /* signature: trichoscope ring */
+    /* signature: follicle section scope (single follicle, serum uptake loop) */
     .scope{
       position:absolute;bottom:-42px;left:-46px;width:clamp(190px,20vw,236px);aspect-ratio:1;
       background:var(--white);border:1px solid var(--hair);border-radius:50%;
@@ -168,11 +172,26 @@
     .scope svg{width:82%;height:82%;display:block}
     .scope .ring-t{stroke:var(--hair);stroke-width:1}
     .scope .tick{stroke:var(--navy);stroke-width:1.4}
-    .scope .strand{stroke:var(--navy);stroke-width:1.7;stroke-linecap:round;fill:none}
-    .scope .strand.red{stroke:var(--accent)}
-    .scope .bulb{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.1}
-    .js .scope .strand{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1);transition-delay:var(--sd,0s)}
-    .js .scope.drawn .strand{stroke-dashoffset:0}
+    .scope .derm{stroke:var(--navy);stroke-width:1.3;fill:none;opacity:.55}
+    .scope .shaft{stroke:var(--navy);stroke-width:2;stroke-linecap:round;fill:none}
+    .scope .canal{stroke:var(--navy);stroke-width:1.4;stroke-linecap:round;fill:none}
+    .scope .bulb{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}
+    .scope .papilla{fill:none;stroke:var(--accent);stroke-width:1;opacity:.7}
+    .scope .drop{fill:var(--accent);opacity:0}
+    .scope .glow{fill:var(--accent);opacity:0}
+    .js .scope.drawn .drop{animation:uptake 4.6s ease-in-out .4s infinite}
+    .js .scope.drawn .glow{animation:absorb 4.6s ease-in-out .4s infinite}
+    @keyframes uptake{
+      0%,8%{transform:translateY(0);opacity:0}
+      14%{opacity:1}
+      52%{transform:translateY(33px);opacity:1}
+      60%,100%{transform:translateY(33px);opacity:0}
+    }
+    @keyframes absorb{
+      0%,48%{opacity:0}
+      58%{opacity:.5}
+      74%,100%{opacity:0}
+    }
     .scope-label{
       position:absolute;inset:auto 0 13% 0;text-align:center;font-size:.56rem;font-weight:600;
       letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
@@ -181,7 +200,10 @@
       .scope{animation:breathe 7s ease-in-out infinite}
       @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
     }
-    @media (prefers-reduced-motion:reduce){.js .scope .strand{stroke-dasharray:none;stroke-dashoffset:0;transition:none}}
+    @media (prefers-reduced-motion:reduce){
+      .js .scope.drawn .drop,.js .scope.drawn .glow{animation:none}
+      .scope .glow{opacity:.3}
+    }
 
     /* ============ 2. credentials strip ============ */
     .creds{padding:0;border-top:1px solid var(--hair-soft);border-bottom:1px solid var(--hair-soft);background:var(--white)}
@@ -278,6 +300,10 @@
     .rail .media{border-radius:var(--r);overflow:hidden;border:1px solid var(--hair)}
     .rail img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06);transition:transform .5s ease}
     .rail figure:hover img{transform:scale(1.03)}
+    @media (prefers-reduced-motion:no-preference){
+      .rail .media{transition:transform .45s ease,box-shadow .45s ease}
+      .rail figure:hover .media{transform:translateY(-5px);box-shadow:0 16px 34px rgba(0,27,63,.12)}
+    }
     .rail figcaption{padding:13px 2px 0;font-weight:600;font-size:.95rem;color:var(--ink)}
     .rail figcaption small{display:block;font-weight:400;font-size:.82rem;color:var(--muted);margin-top:2px}
 
@@ -292,19 +318,13 @@
     .principles h3{font-size:1.08rem;margin-bottom:6px}
     .principles p{font-size:.94rem;color:var(--muted)}
 
-    /* ============ 11. FAQ ============ */
-    .faq-list{margin-top:clamp(30px,4vw,44px);border-top:1px solid var(--hair);max-width:860px}
-    .faq-item{border-bottom:1px solid var(--hair)}
-    .faq-q{
-      width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;text-align:left;
-      background:none;border:none;padding:22px 2px;cursor:pointer;font-family:var(--body);
-      font-size:1.04rem;font-weight:600;color:var(--ink);
-    }
-    .faq-q .plus{flex:none;width:22px;height:22px;color:var(--accent);transition:transform .25s ease}
-    .faq-item.open .plus{transform:rotate(45deg)}
-    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
-    .faq-a p{padding:0 2px 22px;font-size:.95rem;color:var(--muted);max-width:64ch}
-    @media (prefers-reduced-motion:reduce){.faq-a{transition:none}}
+    /* ============ 11. Google reviews ============ */
+    .g-reviews .wrap{text-align:center}
+    .g-reviews .kicker{justify-content:center}
+    /* max-width guards against the widget helper script assigning a fixed pixel width */
+    .g-reviews iframe{display:block;width:100%;max-width:100% !important;min-height:360px;border:0;border-radius:var(--r);margin-top:clamp(26px,3.5vw,40px)}
+    .g-reviews .g-link{display:inline-block;margin-top:26px;font:600 .72rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--navy);border:1px solid var(--hair);padding:14px 22px;border-radius:var(--r);text-decoration:none;transition:border-color .25s}
+    .g-reviews .g-link:hover{border-color:var(--accent)}
 
     /* ============ 12. CTA offer ============ */
     .offer{background:var(--paper)}
@@ -315,6 +335,10 @@
     .offer-media{position:relative;min-height:380px}
     .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:32% 40%;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06)}
     .offer-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 40%,rgba(0,27,63,.4))}
+    @media (prefers-reduced-motion:no-preference){
+      .offer-badge{animation:bob 6s ease-in-out infinite}
+      @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    }
     .offer-badge{
       position:absolute;top:18px;left:18px;z-index:2;background:var(--navy);color:#fff;border-radius:var(--r);
       padding:9px 14px;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
@@ -343,7 +367,7 @@
     footer{background:var(--navy);color:rgba(255,255,255,.78);padding:clamp(60px,7vw,86px) 0 34px;font-size:.92rem}
     footer a{color:#fff;text-decoration:none;border-bottom:1px solid var(--hair-light);transition:border-color .2s}
     footer a:hover{border-color:var(--accent)}
-    .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(28px,5vw,60px);padding-bottom:44px;border-bottom:1px solid var(--hair-lighter)}
+    .foot-grid{display:grid;grid-template-columns:2fr 1fr;gap:clamp(28px,5vw,60px);padding-bottom:44px;border-bottom:1px solid var(--hair-lighter)}
     .foot-brand .brand{border-bottom:none}
     .foot-brand .brand img{height:32px}
     .foot-brand p{margin-top:14px;font-size:.9rem;color:rgba(255,255,255,.6);max-width:38ch}
@@ -354,8 +378,8 @@
     .foot-loc address{font-style:normal;color:rgba(255,255,255,.62);margin-bottom:12px}
     .foot-loc ul{list-style:none;display:grid;gap:4px;font-size:.84rem;color:rgba(255,255,255,.5)}
     .foot-loc ul li{display:flex;justify-content:space-between;max-width:280px}
-    .foot-bottom{padding-top:30px;display:grid;gap:14px}
-    .foot-bottom p{font-size:.78rem;color:rgba(255,255,255,.44);max-width:none;line-height:1.7}
+    .foot-bottom{padding-top:30px;display:grid;gap:14px;text-align:center}
+    .foot-bottom p{font-size:.78rem;color:rgba(255,255,255,.44);max-width:76ch;margin:0 auto;line-height:1.7}
 
     /* ============ responsive ============ */
     @media (max-width:960px){
@@ -401,7 +425,7 @@
   10. Quote: pull quote + attribution
   11. Clinic rail: 4 images (assets/exosome-vial / prp-centrifuge / consult-hair / hair-grow-supplement, 928x1160) + captions. The supplement photo is the REAL product shot (Drive: Hair Grow 1.JPG).
   12. Approach: side heading + intro, 4 principle rows
-  13. FAQ: 6 questions and answers
+  13. Google reviews: live GHL widget (SF location), link to all reviews
   14. Offer: badge, heading, price line, form labels, select options, fine print, success message. Offer image is a REAL reception photo.
   15. Footer: blurb, contact, legal stubs, 2 locations + hours, copyright, medical disclaimer
 -->
@@ -415,7 +439,7 @@
       <li><a href="#protocol">Protocol</a></li>
       <li><a href="#sessions">Sessions</a></li>
       <li><a href="#approach">Approach</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#reviews">Reviews</a></li>
     </ul>
     <!-- SWAP: header CTA -->
     <a class="nav-cta" href="#start">Book my free consult</a>
@@ -428,7 +452,7 @@
       <li><a href="#protocol">Protocol</a></li>
       <li><a href="#sessions">Sessions</a></li>
       <li><a href="#approach">Approach</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#reviews">Reviews</a></li>
     </ul>
     <a class="nav-cta" href="#start">Book my free consult</a>
   </div>
@@ -466,7 +490,8 @@
           <img class="fallback" src="assets/hero-steps-poster-1000x1240.jpg" width="1000" height="1240" alt="A gloved Biohackr clinician holding the gold RF microneedling handpiece at a patient's hairline" fetchpriority="high">
           <figcaption class="hero-tag">In clinic. Nurse performed.</figcaption>
         </figure>
-        <!-- Signature: trichoscope ring (decorative specimen drawing) -->
+        <!-- Signature: single-follicle section. A serum drop enters the canal, travels to the
+             bulb, and the bulb glows as it absorbs. Loop gated on .drawn (in view). -->
         <div class="scope" aria-hidden="true">
           <svg viewBox="0 0 120 120">
             <circle class="ring-t" cx="60" cy="60" r="56" fill="none"/>
@@ -475,19 +500,23 @@
             <line class="tick" x1="60" y1="109" x2="60" y2="116"/>
             <line class="tick" x1="4" y1="60" x2="11" y2="60"/>
             <line class="tick" x1="109" y1="60" x2="116" y2="60"/>
-            <path class="strand" pathLength="1" style="--sd:.1s" d="M38 92 C36 74 40 60 37 44"/>
-            <path class="strand red" pathLength="1" style="--sd:.25s" d="M48 94 C48 72 52 58 49 38"/>
-            <path class="strand" pathLength="1" style="--sd:.4s" d="M58 95 C60 74 57 56 60 34"/>
-            <path class="strand" pathLength="1" style="--sd:.55s" d="M68 94 C66 76 71 60 68 40"/>
-            <path class="strand red" pathLength="1" style="--sd:.7s" d="M78 92 C80 76 76 62 79 46"/>
-            <ellipse class="bulb" cx="37.5" cy="94" rx="3.2" ry="4.2"/>
-            <ellipse class="bulb" cx="48" cy="96" rx="3.2" ry="4.2"/>
-            <ellipse class="bulb" cx="58" cy="97" rx="3.2" ry="4.2"/>
-            <ellipse class="bulb" cx="68" cy="96" rx="3.2" ry="4.2"/>
-            <ellipse class="bulb" cx="78" cy="94" rx="3.2" ry="4.2"/>
+            <!-- skin surface, two dermal lines -->
+            <path class="derm" d="M22 42 C40 38 80 38 98 42"/>
+            <path class="derm" d="M24 50 C42 46 78 46 96 50"/>
+            <!-- hair shaft above the surface -->
+            <path class="shaft" d="M60 40 C58 32 62 24 59 15"/>
+            <!-- follicle canal walls narrowing to the bulb -->
+            <path class="canal" d="M55.5 44 C54.5 58 54.5 70 56 78"/>
+            <path class="canal" d="M64.5 44 C65.5 58 65.5 70 64 78"/>
+            <!-- bulb + dermal papilla -->
+            <ellipse class="bulb" cx="60" cy="85" rx="7" ry="8"/>
+            <path class="papilla" d="M56.5 90 C58 86.5 62 86.5 63.5 90"/>
+            <!-- serum drop (travels down the canal) + absorption glow -->
+            <ellipse class="glow" cx="60" cy="85" rx="10.5" ry="11.5"/>
+            <circle class="drop" cx="60" cy="47" r="2.5"/>
           </svg>
           <!-- SWAP: scope label -->
-          <span class="scope-label">Follicle field 20x</span>
+          <span class="scope-label">Follicle uptake 20x</span>
         </div>
       </div>
     </div>
@@ -691,39 +720,17 @@
     </div>
   </section>
 
-  <!-- 11. FAQ -->
-  <section id="faq" aria-labelledby="faq-h">
+  <!-- 11. GOOGLE REVIEWS -->
+  <section id="reviews" class="g-reviews" aria-labelledby="reviews-h">
     <div class="wrap">
-      <p class="kicker reveal">Questions</p>
+      <p class="kicker reveal">From our Google reviews</p>
       <!-- SWAP: heading -->
-      <h2 id="faq-h" class="reveal" style="--d:.07s">Asked at almost every consult</h2>
-      <div class="faq-list">
-        <!-- SWAP: FAQ items -->
-        <div class="faq-item reveal">
-          <button class="faq-q" aria-expanded="false"><span>Does microneedling with exosomes hurt?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-          <div class="faq-a"><p>Most patients describe it as pressure with mild prickling. We use topical numbing before treatment, and the scalp may feel tight or tender for a day. Most people return to work the same day.</p></div>
-        </div>
-        <div class="faq-item reveal" style="--d:.05s">
-          <button class="faq-q" aria-expanded="false"><span>How soon will I see results?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-          <div class="faq-a"><p>Hair grows in slow cycles, so honest answers are measured in months, not weeks. Shedding often stabilizes first, with visible density changes typically assessed at your follow-up photo review. Results vary from person to person.</p></div>
-        </div>
-        <div class="faq-item reveal" style="--d:.1s">
-          <button class="faq-q" aria-expanded="false"><span>Who performs the treatments?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-          <div class="faq-a"><p>Treatments are performed by experienced registered nurses, with every plan reviewed by our board-certified physicians. Biohackr Health was founded and is led by practicing MDs.</p></div>
-        </div>
-        <div class="faq-item reveal" style="--d:.15s">
-          <button class="faq-q" aria-expanded="false"><span>I already use minoxidil. Is this still worth it?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-          <div class="faq-a"><p>Often, yes. Plateauing on minoxidil alone is one of the most common reasons people come in. Regenerative treatments work on the follicle itself, and prescription-strength or oral formats may absorb better than what you are using now. The exam will tell us.</p></div>
-        </div>
-        <div class="faq-item reveal" style="--d:.2s">
-          <button class="faq-q" aria-expanded="false"><span>What does the program cost?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-          <div class="faq-a"><p>It depends on which modalities your plan includes, which is exactly what the free consult determines. You leave the consult with a written plan and exact pricing, and there is no obligation to book treatment that day.</p></div>
-        </div>
-        <div class="faq-item reveal" style="--d:.25s">
-          <button class="faq-q" aria-expanded="false"><span>Which location should I choose?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-          <div class="faq-a"><p>Whichever is easier: the Marina in San Francisco or downtown Palo Alto. Both clinics run the full hair protocol, and your records travel between them.</p></div>
-        </div>
-      </div>
+      <h2 id="reviews-h" class="reveal" style="--d:.07s">What patients say about us</h2>
+      <!-- Live reviews: the clinic's GHL/LeadConnector reviews widget (same widget the botox LP
+           embeds, vscbiVBPwkbdhVINAGjF). Pulls the SF location's synced Google reviews and
+           updates automatically as new reviews are written. -->
+      <iframe id="msgsndr_reviews" class="reveal" title="Biohackr Health Google reviews" src="https://backend.leadconnectorhq.com/appengine/reviews/get_widget/vscbiVBPwkbdhVINAGjF" frameborder="0" scrolling="auto" loading="lazy"></iframe>
+      <a class="g-link reveal" style="--d:.14s" href="https://www.google.com/search?q=biohackr+health#lrd=0x808581657af64d31:0x1a2a2a9bc73a82fc,1,,," target="_blank" rel="noopener">Read all our reviews on Google</a>
     </div>
   </section>
 
@@ -748,13 +755,17 @@
           <form class="form" action="#" method="post" novalidate>
             <div>
               <label for="f-name">First name</label>
-              <input id="f-name" name="name" type="text" autocomplete="given-name" required>
+              <input id="f-name" name="first_name" type="text" autocomplete="given-name" required>
+            </div>
+            <div>
+              <label for="f-lname">Last name</label>
+              <input id="f-lname" name="last_name" type="text" autocomplete="family-name" required>
             </div>
             <div>
               <label for="f-phone">Phone</label>
               <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
             </div>
-            <div class="full">
+            <div>
               <label for="f-email">Email</label>
               <input id="f-email" name="email" type="email" autocomplete="email" required>
             </div>
@@ -764,6 +775,14 @@
                 <option>San Francisco, Marina</option>
                 <option>Palo Alto</option>
                 <option>Either works</option>
+              </select>
+            </div>
+            <div class="full">
+              <label for="f-type">Consult preference</label>
+              <select id="f-type" name="consult_type">
+                <option>In person, at the clinic</option>
+                <option>Phone call</option>
+                <option>No preference</option>
               </select>
             </div>
             <div class="full">
@@ -797,28 +816,14 @@
         <!-- SWAP: contact -->
         <ul>
           <li><a href="tel:+16503701588">(650) 370-1588</a></li>
-          <li><a href="https://www.biohackr.health/contact/">Request a callback</a></li>
-          <li><a href="https://www.biohackr.health/">biohackr.health</a></li>
         </ul>
-      </div>
-      <div class="foot-col">
-        <h4>Legal</h4>
-        <!-- SWAP: legal links, point at real pages before running ads -->
-        <nav aria-label="Legal">
-          <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">HIPAA Notice</a></li>
-            <li><a href="#">Accessibility</a></li>
-          </ul>
-        </nav>
       </div>
     </div>
     <div class="foot-loc">
       <!-- SWAP: location 1 -->
       <div class="loc">
         <b>San Francisco</b>
-        <address>1877 Union Street<br>San Francisco, CA 94123</address>
+        <address><a href="https://goo.gl/maps/8pzTGUEau1jUC3kdA" target="_blank" rel="noopener">1877 Union Street<br>San Francisco, CA 94123</a></address>
         <ul>
           <li><span>Mon to Fri</span><span>10:00 AM to 6:00 PM</span></li>
           <li><span>Saturday</span><span>10:00 AM to 4:00 PM</span></li>
@@ -827,7 +832,7 @@
       <!-- SWAP: location 2 -->
       <div class="loc">
         <b>Palo Alto</b>
-        <address>540 Bryant Street<br>Palo Alto, CA 94301</address>
+        <address><a href="https://goo.gl/maps/CsZk6nJtbnXJgPLYA" target="_blank" rel="noopener">540 Bryant Street<br>Palo Alto, CA 94301</a></address>
         <ul>
           <li><span>Mon to Fri</span><span>10:30 AM to 6:00 PM</span></li>
           <li><span>Saturday</span><span>10:00 AM to 4:00 PM</span></li>
@@ -884,16 +889,39 @@
     nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
   })();
 
-  /* FAQ accordion */
+  /* Stat band count-up (skips non-numeric stats; respects reduced motion) */
   (function(){
-    document.querySelectorAll('.faq-item').forEach(function(item){
-      var q=item.querySelector('.faq-q'),a=item.querySelector('.faq-a');
-      q.addEventListener('click',function(){
-        var open=item.classList.toggle('open');
-        q.setAttribute('aria-expanded',open?'true':'false');
-        a.style.maxHeight=open?a.scrollHeight+'px':'0px';
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var stats=document.querySelectorAll('.stat b');
+    if(!stats.length||reduce||!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting)return;
+        io.unobserve(e.target);
+        var node=e.target.firstChild;
+        if(!node||node.nodeType!==3)return;
+        var n=parseInt(node.textContent,10);
+        if(isNaN(n)||n<=0)return;
+        var start=null;
+        function tick(t){
+          if(start===null)start=t;
+          var k=Math.min((t-start)/900,1);
+          node.textContent=String(Math.round(n*(1-Math.pow(1-k,3))));
+          if(k<1)requestAnimationFrame(tick);
+        }
+        node.textContent='0';
+        requestAnimationFrame(tick);
       });
-    });
+    },{threshold:.6});
+    stats.forEach(function(b){io.observe(b)});
+  })();
+
+  /* GHL reviews widget helper (auto-sizes the #msgsndr_reviews iframe). Loaded dynamically. */
+  (function(){
+    var rw=document.createElement('script');
+    rw.src='https://apisystem.tech/js/reviews_widget.js';
+    rw.defer=true;
+    document.body.appendChild(rw);
   })();
 
   /* Form: demo submit, shows confirmation. Wire action to the real webhook before ads run. */
