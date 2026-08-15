@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<!--
+  STANDALONE CLIENT PAGE. Biohackr Health hair restoration Google Ads landing page.
+  This file is a client copy, not a library master. The source of design truth is the
+  website-templates skill (.agents/skills/website-templates/) and the Biohackr brand kit
+  (clients/biohackr/brand/biohackr-brand-kit.md). Copy facts were pulled from
+  https://biohackrhealth.net/hair-landing-page-475398 on 2026-08-13.
+-->
+<!--
+  P0 SPEC (design-method steps 1 to 7)
+  1. Concept sentence: ivory follicle field study, etched specimen linework, one breathing trichoscope ring.
+  2. Ground: warm ivory paper. One full-contrast moment: the marine navy measurement stat band.
+  3. Palette: blood red accent family on warm ivory, marine navy ink, mint support in tiny doses.
+  4. Type: Fraunces display, Inter body (brand kit fallback sans). Sentence case headings.
+  5. Space: 1160 wrap, generous rhythm, 2px radius stance everywhere, 1px navy-tinted hairlines.
+  6. Signature: hero trichoscope ring, a circular specimen field of follicle strokes that draw
+     themselves on load and keep a slow 7s breath. Reduced motion: fully drawn, still.
+  7. Motion: transform-only reveals, 70ms stagger. Accordion and mobile nav within 300ms.
+  SECTION PLAN (no two adjacent share a layout; planned words ~1,100)
+   # | section            | layout (menu #)          | kicker                | bespoke device              | words
+   1 | hero               | 1 split hero             | HAIR RESTORATION      | trichoscope ring + photo    | 80
+   2 | credentials strip  | centered strip           |                       | typographic credentials     | 25
+   3 | film band          | 2 full-bleed + scrim     | INSIDE THE PROGRAM    | video slot + ken burns      | 50
+   4 | modalities         | 5 numbered plates        | THE PROTOCOL          | index plates, follicle marks| 150
+   5 | three sessions     | 4 ledger rows            | THREE SESSIONS        | session ledger + timeline   | 140
+   6 | navy stat band     | 9 stat band              | MEASURED CARE         | oversized numerals          | 40
+   7 | signs              | 3 asymmetric split       | WHEN TO COME IN       | image + tick rows           | 120
+   8 | pull quote         | 11 editorial quote       |                       | oversized quote mark        | 40
+   9 | clinic rail        | 6 scroll-snap rail       | INSIDE THE CLINIC     | captioned rail              | 50
+  10 | honest approach    | 7 sticky side            | OUR APPROACH          | 90deg side label            | 150
+  11 | FAQ                | accordion rows           | QUESTIONS             | plus accordion              | 190
+  12 | CTA offer + form   | split offer card         | START WITH A CONSULT  | photo + spots badge         | 110
+  13 | footer             | rich footer              |                       | 2 locations + compliance    | 140
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SWAP: page title. Keep the pipe separator, never a dash. -->
+  <title>Biohackr Health | Physician-Led Hair Restoration in San Francisco and Palo Alto</title>
+  <!-- SWAP: meta description, 150 to 160 characters. -->
+  <meta name="description" content="Hair restoration at the cellular level: microneedling with Age Zero exosomes, PRP, and prescription therapy. Free nurse hair consult, SF and Palo Alto.">
+  <meta name="theme-color" content="#f7f4ee">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23001b3f'/%3E%3Cpath d='M22 14 v36 M22 32 c8 -3 12 -9 12 -18 M22 34 c9 2 13 7 13 16 M42 14 v36 M42 30 c8 -2 11 -8 11 -16 M42 32 c9 3 12 8 12 16' fill='none' stroke='%23e01919' stroke-width='4.4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- SWAP: fonts. One display, one body. -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* SWAP: brand palette (edit these tokens only) */
+    :root{
+      --paper:#f7f4ee; --white:#fffdf9; --panel:#efeae0;
+      --navy:#001b3f; --navy-2:#0a2a55;
+      --accent:#e01919; --accent-deep:#a81012; --accent-soft:#f6dcd6;
+      --support:#9cd3ca; --support-deep:#41897f;
+      --ink:#1d2637; --ink-2:#42506a;
+      --muted:rgba(29,38,55,.68); --faint:rgba(29,38,55,.46);
+      --hair:rgba(0,27,63,.16); --hair-soft:rgba(0,27,63,.08);
+      --hair-light:rgba(255,255,255,.22); --hair-lighter:rgba(255,255,255,.1);
+      --disp:'Fraunces',serif; --body:'Inter',sans-serif;
+      --r:2px; --header-h:70px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    html,body{overflow-x:clip}
+    body{
+      font-family:var(--body);color:var(--ink);background:var(--paper);
+      font-size:1.02rem;line-height:1.68;font-variant-numeric:tabular-nums;
+      -webkit-font-smoothing:antialiased;
+    }
+    body.no-scroll{overflow:hidden}
+    ::selection{background:var(--accent);color:#fff}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r)}
+    img{display:block;max-width:100%;height:auto}
+    a{color:var(--accent-deep)}
+    .skip{position:absolute;left:-999px;top:0;background:var(--navy);color:#fff;padding:10px 18px;z-index:200;border-radius:var(--r)}
+    .skip:focus{left:12px;top:12px}
+    .wrap{max-width:1160px;margin:0 auto;padding:0 26px}
+    section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
+    section{padding:clamp(74px,9vw,118px) 0}
+
+    h1,h2,h3{font-family:var(--disp);font-weight:600;color:var(--ink)}
+    h1{font-size:clamp(2.9rem,6.4vw,5rem);line-height:1.04;letter-spacing:0;max-width:14ch}
+    h2{font-size:clamp(2.2rem,4.6vw,3.4rem);line-height:1.08;max-width:22ch}
+    h3{font-size:1.18rem;line-height:1.3}
+    p{max-width:62ch}
+    .lede{font-size:1.08rem;color:var(--ink-2)}
+
+    .kicker{
+      display:inline-flex;align-items:center;gap:12px;margin-bottom:18px;
+      font-size:.68rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
+    }
+    .kicker::before{content:"";width:26px;height:2px;background:var(--accent)}
+    .kicker.on-dark{color:var(--support)}
+    .kicker.on-dark::before{background:var(--support)}
+
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:var(--r);
+      background:var(--accent);color:#fff;font-weight:600;font-size:.98rem;text-decoration:none;
+      border:1px solid var(--accent);transition:background .2s ease,transform .2s ease,box-shadow .2s ease;
+    }
+    .btn svg{width:18px;height:18px;transition:transform .2s ease}
+    .btn:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-2px);box-shadow:0 10px 24px rgba(224,25,25,.18)}
+    .btn:hover svg{transform:translateX(4px)}
+    .btn:active{transform:translateY(0)}
+    .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--hair)}
+    .btn-ghost:hover{background:var(--white);border-color:var(--ink-2);box-shadow:none;color:var(--ink)}
+
+    /* reveals: transform-only, never opacity 0 */
+    .js .reveal{transform:translateY(20px);transition:transform .8s cubic-bezier(.17,.67,.3,1);transition-delay:var(--d,0s)}
+    .js .reveal.in{transform:none}
+    @media (prefers-reduced-motion:reduce){.js .reveal{transform:none;transition:none}}
+
+    /* ============ header ============ */
+    header{
+      position:sticky;top:0;z-index:100;height:var(--header-h);
+      background:rgba(247,244,238,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--hair-soft);
+    }
+    .nav{max-width:1160px;margin:0 auto;padding:0 26px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:inline-flex;align-items:baseline;gap:6px;font-family:var(--disp);font-weight:600;font-size:1.22rem;color:var(--ink);text-decoration:none}
+    .brand .b-red{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:26px;list-style:none}
+    .nav-links a{color:var(--ink-2);text-decoration:none;font-size:.92rem;font-weight:500;padding:6px 2px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+    .nav-links a:hover{color:var(--ink);border-color:var(--accent)}
+    .nav-cta{display:inline-flex;align-items:center;padding:10px 18px;border-radius:var(--r);background:var(--navy);color:#fff;font-size:.88rem;font-weight:600;text-decoration:none;transition:background .2s,transform .2s}
+    .nav-cta:hover{background:var(--navy-2);transform:translateY(-1px)}
+    .menu-btn{display:none;background:none;border:1px solid var(--hair);border-radius:var(--r);padding:9px 11px;cursor:pointer;color:var(--ink)}
+    .menu-btn svg{width:20px;height:20px;display:block}
+    .m-nav{position:fixed;inset:var(--header-h) 0 0 0;background:var(--paper);z-index:99;display:none;padding:34px 26px;border-top:1px solid var(--hair)}
+    .m-nav.open{display:block}
+    .m-nav ul{list-style:none;display:grid;gap:6px}
+    .m-nav a{display:block;padding:16px 4px;font-size:1.25rem;font-family:var(--disp);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--hair-soft)}
+    .m-nav .nav-cta{margin-top:22px;justify-content:center;display:flex;font-size:1rem;padding:16px}
+
+    /* ============ 1. hero ============ */
+    .hero{position:relative;padding:clamp(70px,9vw,120px) 0 clamp(86px,11vw,140px);overflow:clip}
+    .hero::before{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(60% 48% at 82% 6%,rgba(224,25,25,.07),transparent 70%),
+        radial-gradient(46% 40% at 8% 88%,rgba(156,211,202,.14),transparent 70%);
+    }
+    .hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(34px,5vw,66px);align-items:center}
+    .hero-copy .lede{margin:24px 0 30px}
+    .hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+    .hero-note{display:flex;align-items:flex-start;gap:9px;margin-top:24px;font-size:.86rem;color:var(--muted);max-width:44ch}
+    .hero-note svg{width:17px;height:17px;flex:none;margin-top:2px;color:var(--support-deep)}
+    .hero-visual{position:relative}
+    .hero-photo{
+      position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--hair);
+      background:var(--panel);
+    }
+    .hero-photo img{position:relative;z-index:1;width:100%;aspect-ratio:5/6.2;object-fit:cover;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06);transition:opacity .8s ease}
+    .hero-photo video{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06)}
+    .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,244,238,.06),rgba(0,27,63,.12));pointer-events:none}
+    .hero-tag{
+      position:absolute;top:18px;left:18px;z-index:2;background:rgba(255,253,249,.92);border:1px solid var(--hair);
+      border-radius:var(--r);padding:8px 13px;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);
+    }
+    /* signature: trichoscope ring */
+    .scope{
+      position:absolute;bottom:-42px;left:-46px;width:clamp(190px,20vw,236px);aspect-ratio:1;
+      background:var(--white);border:1px solid var(--hair);border-radius:50%;
+      box-shadow:0 18px 44px rgba(0,27,63,.14);display:grid;place-items:center;z-index:3;
+    }
+    .scope svg{width:82%;height:82%;display:block}
+    .scope .ring-t{stroke:var(--hair);stroke-width:1}
+    .scope .tick{stroke:var(--navy);stroke-width:1.4}
+    .scope .strand{stroke:var(--navy);stroke-width:1.7;stroke-linecap:round;fill:none}
+    .scope .strand.red{stroke:var(--accent)}
+    .scope .bulb{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.1}
+    .js .scope .strand{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1);transition-delay:var(--sd,0s)}
+    .js .scope.drawn .strand{stroke-dashoffset:0}
+    .scope-label{
+      position:absolute;inset:auto 0 13% 0;text-align:center;font-size:.56rem;font-weight:600;
+      letter-spacing:.26em;text-transform:uppercase;color:var(--faint);
+    }
+    @media (prefers-reduced-motion:no-preference){
+      .scope{animation:breathe 7s ease-in-out infinite}
+      @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+    }
+    @media (prefers-reduced-motion:reduce){.js .scope .strand{stroke-dasharray:none;stroke-dashoffset:0;transition:none}}
+
+    /* ============ 2. credentials strip ============ */
+    .creds{padding:0;border-top:1px solid var(--hair-soft);border-bottom:1px solid var(--hair-soft);background:var(--white)}
+    .creds-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+    .creds-row li{
+      list-style:none;padding:26px 20px;text-align:center;font-size:.78rem;font-weight:600;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);border-left:1px solid var(--hair-soft);
+    }
+    .creds-row li:first-child{border-left:none}
+    .creds-row b{display:block;font-family:var(--disp);font-weight:600;font-size:1.3rem;letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:2px}
+
+    /* ============ 3. film band ============ */
+    .film{position:relative;padding:0;min-height:min(72vh,620px);display:grid;align-items:end;overflow:clip;background:var(--navy)}
+    .film video,.film .fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .film .fallback{filter:grayscale(.16) contrast(1.04) brightness(.9)}
+    @media (prefers-reduced-motion:no-preference){
+      .film .fallback.kb{animation:kb 34s ease-in-out infinite alternate}
+      @keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+    }
+    .film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,27,63,.14) 0%,rgba(0,27,63,.72) 82%)}
+    .film-copy{position:relative;z-index:2;padding:clamp(60px,8vw,96px) 0}
+    .film-copy h2{color:#fff}
+    .film-copy p{color:rgba(255,255,255,.82);margin-top:14px;max-width:52ch}
+
+    /* ============ 4. modalities: numbered plates ============ */
+    .plates{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.6vw,26px);margin-top:clamp(36px,5vw,54px)}
+    .plate{
+      position:relative;background:var(--white);border:1px solid var(--hair);border-radius:var(--r);
+      padding:28px 24px 26px;display:flex;flex-direction:column;gap:12px;
+      transition:transform .25s ease,border-color .25s ease;
+    }
+    .plate:hover{transform:translateY(-3px);border-color:var(--ink-2)}
+    .plate .idx{font-family:var(--disp);font-size:.94rem;color:var(--accent);letter-spacing:.06em}
+    .plate .idx::after{content:"";display:block;width:100%;height:1px;background:var(--hair);margin-top:12px}
+    .plate p{font-size:.92rem;color:var(--muted)}
+    .plate .mark{width:34px;height:34px;color:var(--navy)}
+    .plate .mark svg{width:100%;height:100%}
+    .sect-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
+    .sect-head p{color:var(--muted)}
+
+    /* ============ 5. three sessions: ledger ============ */
+    .sessions{background:var(--white);border-top:1px solid var(--hair-soft);border-bottom:1px solid var(--hair-soft)}
+    .ledger{margin-top:clamp(32px,4vw,46px);border-top:1px solid var(--hair)}
+    .ledger-row{
+      display:grid;grid-template-columns:88px 1.1fr 1.6fr auto;gap:clamp(16px,3vw,34px);align-items:center;
+      padding:26px 4px;border-bottom:1px solid var(--hair);transition:background .2s ease;
+    }
+    .ledger-row:hover{background:var(--paper)}
+    .ledger-row .no{font-family:var(--disp);font-size:1.7rem;color:var(--accent)}
+    .ledger-row h3{font-size:1.14rem}
+    .ledger-row p{font-size:.92rem;color:var(--muted);max-width:52ch}
+    .ledger-row .tag{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--support-deep);white-space:nowrap}
+    .ledger-note{margin-top:18px;font-size:.85rem;color:var(--faint)}
+
+    /* ============ 6. stat band ============ */
+    .stats{background:var(--navy);color:#fff;position:relative;overflow:clip}
+    .stats::before{content:"";position:absolute;inset:0;background:radial-gradient(52% 60% at 88% 0%,rgba(224,25,25,.14),transparent 70%)}
+    .stats h2{color:#fff}
+    .stats .wrap{position:relative}
+    .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(22px,4vw,44px);margin-top:clamp(30px,4vw,44px)}
+    .stat b{display:block;font-family:var(--disp);font-weight:600;font-size:clamp(2.6rem,5vw,4rem);line-height:1;color:#fff}
+    .stat b i{font-style:normal;font-size:.45em;color:var(--support)}
+    .stat span{display:block;margin-top:10px;font-size:.78rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+    .stat{padding-top:20px;border-top:1px solid var(--hair-light)}
+    .stats .foot{margin-top:34px;font-size:.82rem;color:rgba(255,255,255,.5);max-width:70ch}
+
+    /* ============ 7. signs: asymmetric split ============ */
+    .signs-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(30px,5vw,64px);align-items:center}
+    .signs-media{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--hair)}
+    .signs-media img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06)}
+    .signs-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,27,63,.36));pointer-events:none}
+    .signs-media figcaption{
+      position:absolute;left:16px;bottom:14px;z-index:2;color:#fff;font-size:.8rem;font-weight:500;
+      text-shadow:0 1px 8px rgba(0,27,63,.5);
+    }
+    .tick-rows{list-style:none;margin-top:26px;border-top:1px solid var(--hair)}
+    .tick-rows li{display:flex;gap:14px;align-items:flex-start;padding:17px 2px;border-bottom:1px solid var(--hair);font-size:.98rem;color:var(--ink-2)}
+    .tick-rows svg{width:19px;height:19px;flex:none;margin-top:3px;color:var(--accent)}
+    .signs-copy>p{color:var(--muted);margin-top:16px}
+
+    /* ============ 8. quote ============ */
+    .quote{background:var(--panel);border-top:1px solid var(--hair-soft);border-bottom:1px solid var(--hair-soft)}
+    .quote blockquote{position:relative;max-width:860px;margin:0 auto;text-align:left;padding-left:clamp(46px,7vw,84px)}
+    .quote blockquote::before{
+      content:"\201C";position:absolute;left:0;top:-12px;font-family:var(--disp);font-size:clamp(4.4rem,9vw,7rem);
+      line-height:1;color:var(--accent);
+    }
+    .quote p{font-family:var(--disp);font-size:clamp(1.5rem,3.2vw,2.2rem);line-height:1.32;color:var(--ink);max-width:none}
+    .quote cite{display:block;margin-top:22px;font-style:normal;font-size:.8rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+    /* ============ 9. clinic rail ============ */
+    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(340px,78vw);gap:clamp(16px,2.4vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;padding:clamp(30px,4vw,44px) 26px 12px;max-width:1160px;margin:0 auto;scrollbar-width:thin}
+    .rail figure{scroll-snap-align:start;margin:0}
+    .rail .media{border-radius:var(--r);overflow:hidden;border:1px solid var(--hair)}
+    .rail img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06);transition:transform .5s ease}
+    .rail figure:hover img{transform:scale(1.03)}
+    .rail figcaption{padding:13px 2px 0;font-weight:600;font-size:.95rem;color:var(--ink)}
+    .rail figcaption small{display:block;font-weight:400;font-size:.82rem;color:var(--muted);margin-top:2px}
+
+    /* ============ 10. honest approach: sticky side ============ */
+    .approach{background:var(--white);border-top:1px solid var(--hair-soft)}
+    .approach-grid{display:grid;grid-template-columns:4fr 8fr;gap:clamp(30px,5vw,64px)}
+    .approach-side{position:sticky;top:calc(var(--header-h) + 26px);align-self:start}
+    .approach-side p{color:var(--muted);margin-top:16px}
+    .principles{list-style:none;border-top:1px solid var(--hair)}
+    .principles li{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:26px 2px;border-bottom:1px solid var(--hair)}
+    .principles .p-idx{font-family:var(--disp);color:var(--accent);font-size:1.05rem;padding-top:2px}
+    .principles h3{font-size:1.08rem;margin-bottom:6px}
+    .principles p{font-size:.94rem;color:var(--muted)}
+
+    /* ============ 11. FAQ ============ */
+    .faq-list{margin-top:clamp(30px,4vw,44px);border-top:1px solid var(--hair);max-width:860px}
+    .faq-item{border-bottom:1px solid var(--hair)}
+    .faq-q{
+      width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;text-align:left;
+      background:none;border:none;padding:22px 2px;cursor:pointer;font-family:var(--body);
+      font-size:1.04rem;font-weight:600;color:var(--ink);
+    }
+    .faq-q .plus{flex:none;width:22px;height:22px;color:var(--accent);transition:transform .25s ease}
+    .faq-item.open .plus{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-a p{padding:0 2px 22px;font-size:.95rem;color:var(--muted);max-width:64ch}
+    @media (prefers-reduced-motion:reduce){.faq-a{transition:none}}
+
+    /* ============ 12. CTA offer ============ */
+    .offer{background:var(--paper)}
+    .offer-card{
+      display:grid;grid-template-columns:5fr 7fr;background:var(--white);border:1px solid var(--hair);
+      border-radius:var(--r);overflow:hidden;
+    }
+    .offer-media{position:relative;min-height:380px}
+    .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:32% 40%;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06)}
+    .offer-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 40%,rgba(0,27,63,.4))}
+    .offer-badge{
+      position:absolute;top:18px;left:18px;z-index:2;background:var(--navy);color:#fff;border-radius:var(--r);
+      padding:9px 14px;font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    }
+    .offer-body{padding:clamp(30px,4.5vw,54px)}
+    .offer-body .price{display:flex;align-items:baseline;gap:12px;margin:18px 0 8px}
+    .offer-body .price b{font-family:var(--disp);font-size:2.6rem;font-weight:600;color:var(--ink)}
+    .offer-body .price s{color:var(--faint);font-size:1.1rem}
+    .offer-body>p{font-size:.95rem;color:var(--muted)}
+    .form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+    .form .full{grid-column:1/-1}
+    .form label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:7px}
+    .form input,.form select{
+      width:100%;padding:13px 14px;border:1px solid var(--hair);border-radius:var(--r);background:var(--paper);
+      font-family:var(--body);font-size:.96rem;color:var(--ink);transition:border-color .2s;
+    }
+    .form input:hover,.form select:hover{border-color:var(--ink-2)}
+    .form input:focus-visible,.form select:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+    .form .btn{width:100%;justify-content:center;margin-top:4px}
+    .form-fine{grid-column:1/-1;font-size:.78rem;color:var(--faint);max-width:none}
+    .form-done{display:none;margin-top:26px;padding:22px;border:1px solid var(--support-deep);border-radius:var(--r);background:rgba(156,211,202,.16);color:var(--ink)}
+    .form-done.show{display:block}
+    .form-done b{color:var(--support-deep)}
+
+    /* ============ 13. footer ============ */
+    footer{background:var(--navy);color:rgba(255,255,255,.78);padding:clamp(60px,7vw,86px) 0 34px;font-size:.92rem}
+    footer a{color:#fff;text-decoration:none;border-bottom:1px solid var(--hair-light);transition:border-color .2s}
+    footer a:hover{border-color:var(--accent)}
+    .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:clamp(28px,5vw,60px);padding-bottom:44px;border-bottom:1px solid var(--hair-lighter)}
+    .foot-brand .brand{color:#fff;font-size:1.4rem}
+    .foot-brand p{margin-top:14px;font-size:.9rem;color:rgba(255,255,255,.6);max-width:38ch}
+    .foot-col h4{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px}
+    .foot-col ul{list-style:none;display:grid;gap:10px}
+    .foot-loc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);padding:38px 0;border-bottom:1px solid var(--hair-lighter)}
+    .foot-loc b{display:block;color:#fff;margin-bottom:8px;font-size:.98rem}
+    .foot-loc address{font-style:normal;color:rgba(255,255,255,.62);margin-bottom:12px}
+    .foot-loc ul{list-style:none;display:grid;gap:4px;font-size:.84rem;color:rgba(255,255,255,.5)}
+    .foot-loc ul li{display:flex;justify-content:space-between;max-width:280px}
+    .foot-bottom{padding-top:30px;display:grid;gap:14px}
+    .foot-bottom p{font-size:.78rem;color:rgba(255,255,255,.44);max-width:none;line-height:1.7}
+
+    /* ============ responsive ============ */
+    @media (max-width:960px){
+      .hero-grid,.signs-grid,.approach-grid,.offer-card{grid-template-columns:1fr}
+      .plates{grid-template-columns:1fr 1fr}
+      .stat-grid{grid-template-columns:1fr 1fr;gap:30px}
+      .creds-row{grid-template-columns:1fr 1fr}
+      .creds-row li:nth-child(3){border-left:none}
+      .creds-row li{border-top:1px solid var(--hair-soft)}
+      .creds-row li:nth-child(-n+2){border-top:none}
+      .approach-side{position:static}
+      .hero-visual{margin-left:46px;margin-bottom:42px}
+      .signs-media{order:-1}
+    }
+    @media (max-width:720px){
+      .nav-links{display:none}
+      .menu-btn{display:inline-flex}
+      .nav .nav-cta{display:none}
+      .plates{grid-template-columns:1fr}
+      .ledger-row{grid-template-columns:56px 1fr;grid-template-rows:auto auto}
+      .ledger-row p{grid-column:2}
+      .ledger-row .tag{grid-column:2;justify-self:start}
+      .form{grid-template-columns:1fr}
+      .hero-visual{margin-left:0}
+      .scope{left:auto;right:-8px;bottom:-38px;width:170px}
+      .offer-media{min-height:280px}
+      .foot-grid,.foot-loc{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body id="top">
+<!--
+  SWAP MANIFEST (in page order)
+  01. Title + meta description (head)
+  02. Header: brand name, nav labels, phone CTA
+  03. Hero: kicker, h1, lede, two CTAs, offer note, photo (assets/hero-scalp-treatment-1000x1240.jpg), scope label
+  04. Credentials strip: 4 credential items
+  05. Film band: video slot (add src + remove hidden), fallback image (assets/treatment-room-1600x900.jpg, REAL clinic photo), heading, line
+  06. Modalities: section heading + 4 plates (index, title, copy)
+  07. Sessions: heading, 4 ledger rows, footnote
+  08. Stat band: 4 stats + footnote
+  09. Signs: image (assets/scalp-exam-928x1160.jpg), heading, 5 tick rows, closing line
+  10. Quote: pull quote + attribution
+  11. Clinic rail: 4 images (assets/exosome-vial / prp-centrifuge / consult-hair / hair-grow-supplement, 928x1160) + captions. The supplement photo is the REAL product shot (Drive: Hair Grow 1.JPG).
+  12. Approach: side heading + intro, 4 principle rows
+  13. FAQ: 6 questions and answers
+  14. Offer: badge, heading, price line, form labels, select options, fine print, success message. Offer image is a REAL reception photo.
+  15. Footer: blurb, contact, legal stubs, 2 locations + hours, copyright, medical disclaimer
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <nav class="nav" aria-label="Primary">
+    <!-- SWAP: brand -->
+    <a class="brand" href="#top"><span class="b-red">Biohackr</span><span>Health</span></a>
+    <ul class="nav-links">
+      <li><a href="#protocol">Protocol</a></li>
+      <li><a href="#sessions">Sessions</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <!-- SWAP: header CTA -->
+    <a class="nav-cta" href="#start">Book my free consult</a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="m-nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </nav>
+  <div class="m-nav" id="m-nav">
+    <ul>
+      <li><a href="#protocol">Protocol</a></li>
+      <li><a href="#sessions">Sessions</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="#start">Book my free consult</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. HERO -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <!-- SWAP: hero kicker -->
+        <p class="kicker reveal">Hair restoration, SF and Palo Alto</p>
+        <!-- SWAP: h1, 8 words max -->
+        <h1 id="hero-h" class="reveal" style="--d:.06s">Reclaim your hair at the cellular level</h1>
+        <!-- SWAP: lede -->
+        <p class="lede reveal" style="--d:.12s">Microneedling with Age Zero exosomes, PRP, and prescription therapy, combined into one physician-led plan. Built from a scalp exam, not a sales script: only the treatments your follicles actually need.</p>
+        <div class="hero-ctas reveal" style="--d:.18s">
+          <!-- SWAP: primary CTA -->
+          <a class="btn" href="#start">Book my free hair consult
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#protocol">See the protocol</a>
+        </div>
+        <!-- SWAP: offer microline -->
+        <p class="hero-note reveal" style="--d:.24s">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
+          Nurse hair consult free this month, normally $100. No credit card required. 20 spots available.
+        </p>
+      </div>
+      <div class="hero-visual reveal" style="--d:.14s">
+        <figure class="hero-photo">
+          <!-- SWAP: hero media. REAL-footage steps montage (settings, hairline treatment, detail pass) cut from the clinic's Sylfirm 4K shoot; the poster image is a frame from the same footage. -->
+          <video src="assets/hero-steps-1000x1240.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+          <img class="fallback" src="assets/hero-steps-poster-1000x1240.jpg" width="1000" height="1240" alt="A gloved Biohackr clinician holding the gold RF microneedling handpiece at a patient's hairline" fetchpriority="high">
+          <figcaption class="hero-tag">In clinic. Nurse performed.</figcaption>
+        </figure>
+        <!-- Signature: trichoscope ring (decorative specimen drawing) -->
+        <div class="scope" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-t" cx="60" cy="60" r="56" fill="none"/>
+            <circle class="ring-t" cx="60" cy="60" r="47" fill="none"/>
+            <line class="tick" x1="60" y1="4" x2="60" y2="11"/>
+            <line class="tick" x1="60" y1="109" x2="60" y2="116"/>
+            <line class="tick" x1="4" y1="60" x2="11" y2="60"/>
+            <line class="tick" x1="109" y1="60" x2="116" y2="60"/>
+            <path class="strand" pathLength="1" style="--sd:.1s" d="M38 92 C36 74 40 60 37 44"/>
+            <path class="strand red" pathLength="1" style="--sd:.25s" d="M48 94 C48 72 52 58 49 38"/>
+            <path class="strand" pathLength="1" style="--sd:.4s" d="M58 95 C60 74 57 56 60 34"/>
+            <path class="strand" pathLength="1" style="--sd:.55s" d="M68 94 C66 76 71 60 68 40"/>
+            <path class="strand red" pathLength="1" style="--sd:.7s" d="M78 92 C80 76 76 62 79 46"/>
+            <ellipse class="bulb" cx="37.5" cy="94" rx="3.2" ry="4.2"/>
+            <ellipse class="bulb" cx="48" cy="96" rx="3.2" ry="4.2"/>
+            <ellipse class="bulb" cx="58" cy="97" rx="3.2" ry="4.2"/>
+            <ellipse class="bulb" cx="68" cy="96" rx="3.2" ry="4.2"/>
+            <ellipse class="bulb" cx="78" cy="94" rx="3.2" ry="4.2"/>
+          </svg>
+          <!-- SWAP: scope label -->
+          <span class="scope-label">Follicle field 20x</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CREDENTIALS STRIP -->
+  <section class="creds" aria-label="Clinic credentials">
+    <ul class="creds-row wrap">
+      <!-- SWAP: credentials -->
+      <li class="reveal"><b>Physician led</b>Board certified MDs</li>
+      <li class="reveal" style="--d:.07s"><b>25+ years</b>Clinical experience</li>
+      <li class="reveal" style="--d:.14s"><b>Two clinics</b>SF Marina and Palo Alto</li>
+      <li class="reveal" style="--d:.21s"><b>Science first</b>Exam before treatment</li>
+    </ul>
+  </section>
+
+  <!-- 3. FILM BAND (video slot) -->
+  <section class="film" aria-labelledby="film-h">
+    <!-- SWAP: video slot. Wired to a REAL-footage montage (3 cuts from the clinic's Sylfirm 4K shoot, Drive: Sylfirm X clips IMG_1441/IMG_1444). Swap src to replace, or add hidden to fall back to the still. -->
+    <video src="assets/clinic-film-1600x900.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+    <img class="fallback kb" src="assets/treatment-room-1600x900.jpg" width="1600" height="900" alt="The Biohackr Health treatment lounge: black leather recliners, sheer curtain dividers, and a brass ring chandelier" loading="lazy" decoding="async">
+    <div class="wrap film-copy">
+      <p class="kicker on-dark reveal">Inside the program</p>
+      <!-- SWAP: film heading + line -->
+      <h2 id="film-h" class="reveal" style="--d:.07s">Hair restoration designed for Bay Area innovators</h2>
+      <p class="reveal" style="--d:.14s">Regenerative treatment, prescription support, and honest measurement, delivered in a clinic that treats the follicle like an organ worth studying.</p>
+    </div>
+  </section>
+
+  <!-- 4. MODALITIES: NUMBERED PLATES -->
+  <section id="protocol" aria-labelledby="protocol-h">
+    <div class="wrap">
+      <div class="sect-head">
+        <div>
+          <p class="kicker reveal">The protocol</p>
+          <!-- SWAP: section heading -->
+          <h2 id="protocol-h" class="reveal" style="--d:.07s">Four ways in, one plan</h2>
+        </div>
+        <!-- SWAP: section intro -->
+        <p class="reveal" style="--d:.14s">Your consult decides which of these your plan includes. Never all four by default.</p>
+      </div>
+      <div class="plates">
+        <!-- SWAP: plate 1 -->
+        <article class="plate reveal">
+          <span class="idx">01</span>
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none"><path d="M17 4v14M17 18l-6 10M17 18l6 10M11 8l12 4M23 8L11 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <h3>Microneedling + Age Zero exosomes</h3>
+          <p>Micro-channels open the scalp so regenerative messengers reach the follicle where it lives, paired with topical minoxidil.</p>
+        </article>
+        <!-- SWAP: plate 2 -->
+        <article class="plate reveal" style="--d:.07s">
+          <span class="idx">02</span>
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none"><path d="M13 4h8M17 4v10l6 12a4 4 0 01-4 5h-4a4 4 0 01-4-5l6-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <h3>PRP and PRF injections</h3>
+          <p>Your own platelets, spun down and activated, then placed with precision where density is falling.</p>
+        </article>
+        <!-- SWAP: plate 3 -->
+        <article class="plate reveal" style="--d:.14s">
+          <span class="idx">03</span>
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none"><rect x="7" y="12" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M11 12V8a3 3 0 013-3h6a3 3 0 013 3v4M13 20h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <h3>Prescription strength therapy</h3>
+          <p>Physician-prescribed minoxidil and finasteride, oral or topical, matched to your labs and history.</p>
+        </article>
+        <!-- SWAP: plate 4 -->
+        <article class="plate reveal" style="--d:.21s">
+          <span class="idx">04</span>
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none"><path d="M17 29c-7 0-11-4-11-10C6 12 12 5 17 5s11 7 11 14c0 6-4 10-11 10z" stroke="currentColor" stroke-width="1.6"/><path d="M17 29V15M17 19l-4-3M17 22l4-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <h3>Hair Grow+ supplement</h3>
+          <p>Nutrient and botanical support for keratin production, circulation, stress response, and hormone balance.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THREE SESSIONS: LEDGER -->
+  <section class="sessions" id="sessions" aria-labelledby="sessions-h">
+    <div class="wrap">
+      <p class="kicker reveal">Three focused sessions</p>
+      <!-- SWAP: heading -->
+      <h2 id="sessions-h" class="reveal" style="--d:.07s">Rejuvenation at the root</h2>
+      <div class="ledger">
+        <!-- SWAP: ledger rows -->
+        <div class="ledger-row reveal">
+          <span class="no">01</span>
+          <h3>Exam and baseline</h3>
+          <p>A nurse maps your scalp, reviews history and medications, and photographs your baseline so change is measured, not guessed.</p>
+          <span class="tag">Free this month</span>
+        </div>
+        <div class="ledger-row reveal" style="--d:.07s">
+          <span class="no">02</span>
+          <h3>Treatment sessions</h3>
+          <p>Three in-clinic sessions of your prescribed combination: microneedling with exosomes, PRP or PRF, spaced weeks apart.</p>
+          <span class="tag">In clinic</span>
+        </div>
+        <div class="ledger-row reveal" style="--d:.14s">
+          <span class="no">03</span>
+          <h3>Daily support at home</h3>
+          <p>Prescription minoxidil or finasteride where appropriate, plus the Hair Grow+ supplement, shipped to your door.</p>
+          <span class="tag">Telemedicine</span>
+        </div>
+        <div class="ledger-row reveal" style="--d:.21s">
+          <span class="no">04</span>
+          <h3>Review and maintain</h3>
+          <p>Follow-up photos against your baseline. Keep what is working, drop what is not, and set a maintenance cadence.</p>
+          <span class="tag">Measured</span>
+        </div>
+      </div>
+      <!-- SWAP: ledger footnote -->
+      <p class="ledger-note">Hair follicles cycle slowly. Most protocols are judged over months, and your plan says so up front.</p>
+    </div>
+  </section>
+
+  <!-- 6. STAT BAND -->
+  <section class="stats" aria-labelledby="stats-h">
+    <div class="wrap">
+      <p class="kicker on-dark reveal">Measured care</p>
+      <!-- SWAP: heading -->
+      <h2 id="stats-h" class="reveal" style="--d:.07s">The numbers behind the plan</h2>
+      <div class="stat-grid">
+        <!-- SWAP: stats -->
+        <div class="stat reveal"><b>3</b><span>Focused sessions</span></div>
+        <div class="stat reveal" style="--d:.07s"><b>2</b><span>Bay Area clinics</span></div>
+        <div class="stat reveal" style="--d:.14s"><b>25<i>+yrs</i></b><span>Physician experience</span></div>
+        <div class="stat reveal" style="--d:.21s"><b>$0</b><span>Nurse consult this month</span></div>
+      </div>
+      <!-- SWAP: stat footnote -->
+      <p class="foot reveal" style="--d:.28s">Founded by board-certified physicians. Every hair plan is reviewed by a clinician before treatment begins, and progress is tracked against your own baseline photos.</p>
+    </div>
+  </section>
+
+  <!-- 7. SIGNS: ASYMMETRIC SPLIT -->
+  <section id="signs" aria-labelledby="signs-h">
+    <div class="wrap signs-grid">
+      <figure class="signs-media reveal">
+        <!-- SWAP: signs image -->
+        <img src="assets/scalp-exam-928x1160.jpg" width="928" height="1160" alt="A Biohackr nurse examining a patient's part line under a handheld scalp camera" loading="lazy" decoding="async">
+        <figcaption>The consult starts at the scalp, not the sales desk.</figcaption>
+      </figure>
+      <div class="signs-copy">
+        <p class="kicker reveal">When to come in</p>
+        <!-- SWAP: heading -->
+        <h2 id="signs-h" class="reveal" style="--d:.07s">Catch thinning while the follicle is still alive</h2>
+        <ul class="tick-rows">
+          <!-- SWAP: tick rows -->
+          <li class="reveal"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>Thinning at the crown, temples, or part line</li>
+          <li class="reveal" style="--d:.06s"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>More hair in the drain, the brush, or on the pillow</li>
+          <li class="reveal" style="--d:.12s"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>Shedding after stress, illness, or hormonal change</li>
+          <li class="reveal" style="--d:.18s"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>Early graying or patchy pigment loss</li>
+          <li class="reveal" style="--d:.24s"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>Plateaued on minoxidil or finasteride alone</li>
+        </ul>
+        <!-- SWAP: closing line -->
+        <p class="reveal" style="--d:.3s">A dormant follicle can often be woken. A dead one cannot. The earlier the exam, the more options stay on the table.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PULL QUOTE -->
+  <section class="quote" aria-label="Clinic philosophy">
+    <div class="wrap">
+      <blockquote class="reveal">
+        <!-- SWAP: quote + attribution -->
+        <p>We treat the follicle like any other organ: examine it first, measure it honestly, and only then decide what it needs.</p>
+        <cite>The Biohackr Health care philosophy</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- 9. CLINIC RAIL -->
+  <section class="rail-sect" id="clinic" aria-labelledby="rail-h" style="padding-bottom:clamp(74px,9vw,118px)">
+    <div class="wrap">
+      <p class="kicker reveal">Inside the clinic</p>
+      <!-- SWAP: heading -->
+      <h2 id="rail-h" class="reveal" style="--d:.07s">Regenerative medicine, not a med spa upsell</h2>
+    </div>
+    <div class="rail" tabindex="0" aria-label="Clinic photos, scroll horizontally">
+      <!-- SWAP: rail images + captions. First item is a REAL treatment photo (Sylfirm 4K shoot frame). -->
+      <figure class="reveal"><div class="media"><img src="assets/rf-microneedling-real-928x1160.jpg" width="928" height="1160" alt="The gold RF microneedling handpiece working at a patient's hairline, a gloved hand parting the hair" loading="lazy" decoding="async"></div><figcaption>RF microneedling, in clinic<small>Real treatment, photographed at Biohackr</small></figcaption></figure>
+      <figure class="reveal" style="--d:.07s"><div class="media"><img src="assets/exosome-vial-928x1160.jpg" width="928" height="1160" alt="A glass vial of Age Zero exosome serum on a steel tray beside a microneedling pen" loading="lazy" decoding="async"></div><figcaption>Age Zero exosomes<small>Regenerative messengers, applied in clinic</small></figcaption></figure>
+      <figure class="reveal" style="--d:.07s"><div class="media"><img src="assets/prp-centrifuge-928x1160.jpg" width="928" height="1160" alt="A gloved clinician loading a sealed tube into a benchtop centrifuge to prepare PRP" loading="lazy" decoding="async"></div><figcaption>PRP prepared on site<small>Your own growth factors, same visit</small></figcaption></figure>
+      <figure class="reveal" style="--d:.14s"><div class="media"><img src="assets/consult-hair-928x1160.jpg" width="928" height="1160" alt="A Biohackr team member writing out a treatment plan with a patient at the white consult table" loading="lazy" decoding="async"></div><figcaption>A written plan, reviewed with you<small>Progress judged against your own baseline</small></figcaption></figure>
+      <figure class="reveal" style="--d:.21s"><div class="media"><img src="assets/hair-grow-supplement-928x1160.jpg" width="928" height="1160" alt="The Biohackr Health Hair Grow+ supplement bottle on a white studio turntable" loading="lazy" decoding="async"></div><figcaption>Hair Grow+ supplement<small>The daily formula, shipped to your door</small></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 10. HONEST APPROACH: STICKY SIDE -->
+  <section class="approach" id="approach" aria-labelledby="approach-h">
+    <div class="wrap approach-grid">
+      <div class="approach-side">
+        <p class="kicker reveal">Our approach</p>
+        <!-- SWAP: heading + intro -->
+        <h2 id="approach-h" class="reveal" style="--d:.07s">What we will and will not tell you</h2>
+        <p class="reveal" style="--d:.14s">Hair restoration is full of overpromises. Our plans are built to survive an honest follow-up photo.</p>
+      </div>
+      <ul class="principles">
+        <!-- SWAP: principle rows -->
+        <li class="reveal"><span class="p-idx">A</span><div><h3>An exam before any treatment</h3><p>Nobody is prescribed microneedling, PRP, or medication before a nurse has examined the scalp and a physician has reviewed the plan. Not every treatment suits every head.</p></div></li>
+        <li class="reveal" style="--d:.06s"><span class="p-idx">B</span><div><h3>Results vary, and we say so</h3><p>Response depends on the cause of loss, how early we catch it, and how consistently the plan is followed. We will show you your own photos, not someone else's.</p></div></li>
+        <li class="reveal" style="--d:.12s"><span class="p-idx">C</span><div><h3>Medication only where it belongs</h3><p>Finasteride and oral minoxidil are prescription drugs with real considerations. A licensed clinician decides if they are appropriate for you, and you hear the trade-offs first.</p></div></li>
+        <li class="reveal" style="--d:.18s"><span class="p-idx">D</span><div><h3>No pressure at the consult</h3><p>The free nurse consult ends with a written plan and prices. Take it home. The follicles will still be there tomorrow, and so will we.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11. FAQ -->
+  <section id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <p class="kicker reveal">Questions</p>
+      <!-- SWAP: heading -->
+      <h2 id="faq-h" class="reveal" style="--d:.07s">Asked at almost every consult</h2>
+      <div class="faq-list">
+        <!-- SWAP: FAQ items -->
+        <div class="faq-item reveal">
+          <button class="faq-q" aria-expanded="false"><span>Does microneedling with exosomes hurt?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Most patients describe it as pressure with mild prickling. We use topical numbing before treatment, and the scalp may feel tight or tender for a day. Most people return to work the same day.</p></div>
+        </div>
+        <div class="faq-item reveal" style="--d:.05s">
+          <button class="faq-q" aria-expanded="false"><span>How soon will I see results?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Hair grows in slow cycles, so honest answers are measured in months, not weeks. Shedding often stabilizes first, with visible density changes typically assessed at your follow-up photo review. Results vary from person to person.</p></div>
+        </div>
+        <div class="faq-item reveal" style="--d:.1s">
+          <button class="faq-q" aria-expanded="false"><span>Who performs the treatments?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Treatments are performed by experienced registered nurses, with every plan reviewed by our board-certified physicians. Biohackr Health was founded and is led by practicing MDs.</p></div>
+        </div>
+        <div class="faq-item reveal" style="--d:.15s">
+          <button class="faq-q" aria-expanded="false"><span>I already use minoxidil. Is this still worth it?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Often, yes. Plateauing on minoxidil alone is one of the most common reasons people come in. Regenerative treatments work on the follicle itself, and prescription-strength or oral formats may absorb better than what you are using now. The exam will tell us.</p></div>
+        </div>
+        <div class="faq-item reveal" style="--d:.2s">
+          <button class="faq-q" aria-expanded="false"><span>What does the program cost?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>It depends on which modalities your plan includes, which is exactly what the free consult determines. You leave the consult with a written plan and exact pricing, and there is no obligation to book treatment that day.</p></div>
+        </div>
+        <div class="faq-item reveal" style="--d:.25s">
+          <button class="faq-q" aria-expanded="false"><span>Which location should I choose?</span><svg class="plus" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          <div class="faq-a"><p>Whichever is easier: the Marina in San Francisco or downtown Palo Alto. Both clinics run the full hair protocol, and your records travel between them.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. CTA OFFER + FORM -->
+  <section class="offer" id="start" aria-labelledby="offer-h">
+    <div class="wrap">
+      <div class="offer-card reveal">
+        <div class="offer-media">
+          <!-- SWAP: offer image -->
+          <img src="assets/reception-hair-928x1160.jpg" width="928" height="1160" alt="The Biohackr Health reception desk beneath the navy wall sign on a walnut slat wall" loading="lazy" decoding="async">
+          <!-- SWAP: badge -->
+          <span class="offer-badge">20 spots this month</span>
+        </div>
+        <div class="offer-body">
+          <p class="kicker">Start with a consult</p>
+          <!-- SWAP: offer heading -->
+          <h2 id="offer-h">Free nurse hair consult</h2>
+          <div class="price"><b>$0</b><s>normally $100</s></div>
+          <!-- SWAP: offer copy -->
+          <p>A scalp exam, baseline photos, and a written plan with pricing. No credit card required, and no obligation to book treatment.</p>
+          <!-- SWAP: form. Point action at the real webhook before ads run. -->
+          <form class="form" action="#" method="post" novalidate>
+            <div>
+              <label for="f-name">First name</label>
+              <input id="f-name" name="name" type="text" autocomplete="given-name" required>
+            </div>
+            <div>
+              <label for="f-phone">Phone</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="full">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="full">
+              <label for="f-loc">Preferred clinic</label>
+              <select id="f-loc" name="location">
+                <option>San Francisco, Marina</option>
+                <option>Palo Alto</option>
+                <option>Either works</option>
+              </select>
+            </div>
+            <div class="full">
+              <button class="btn" type="submit">Reserve my free consult
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <!-- SWAP: fine print -->
+            <p class="form-fine">By submitting, you agree to be contacted about scheduling by phone, text, or email. Your information stays with Biohackr Health. Prefer to call? <a href="tel:+16503701588">(650) 370-1588</a>.</p>
+          </form>
+          <div class="form-done" role="status">
+            <p><b>Request received.</b> A nurse coordinator will reach out within one business day to schedule your consult.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top"><span class="b-red">Biohackr</span><span>Health</span></a>
+        <!-- SWAP: footer blurb -->
+        <p>Physician-led hair restoration, NAD+, hormone, and longevity therapies from the original biohacking clinic. Two Bay Area locations.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <!-- SWAP: contact -->
+        <ul>
+          <li><a href="tel:+16503701588">(650) 370-1588</a></li>
+          <li><a href="https://www.biohackr.health/contact/">Request a callback</a></li>
+          <li><a href="https://www.biohackr.health/">biohackr.health</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <!-- SWAP: legal links, point at real pages before running ads -->
+        <nav aria-label="Legal">
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">HIPAA Notice</a></li>
+            <li><a href="#">Accessibility</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="foot-loc">
+      <!-- SWAP: location 1 -->
+      <div class="loc">
+        <b>San Francisco</b>
+        <address>1877 Union Street<br>San Francisco, CA 94123</address>
+        <ul>
+          <li><span>Mon to Fri</span><span>10:00 AM to 6:00 PM</span></li>
+          <li><span>Saturday</span><span>10:00 AM to 4:00 PM</span></li>
+        </ul>
+      </div>
+      <!-- SWAP: location 2 -->
+      <div class="loc">
+        <b>Palo Alto</b>
+        <address>540 Bryant Street<br>Palo Alto, CA 94301</address>
+        <ul>
+          <li><span>Mon to Fri</span><span>10:30 AM to 6:00 PM</span></li>
+          <li><span>Saturday</span><span>10:00 AM to 4:00 PM</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <!-- SWAP: copyright + medical disclaimer -->
+      <p>&copy; 2026 Biohackr Health. All rights reserved.</p>
+      <p>Hair restoration treatments, including microneedling with exosomes, PRP, PRF, minoxidil, and finasteride, are provided only after a licensed clinician determines they are appropriate for you, and they are not suitable for everyone. Individual results vary and are not guaranteed; images on this page are illustrative. Statements about supplements have not been evaluated by the Food and Drug Administration; supplements are not intended to diagnose, treat, cure, or prevent any disease. This page is informational and is not medical advice. If you are experiencing a medical emergency, call 911.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ===== BESPOKE MOTION (safe to delete) ===== */
+  /* Signature: trichoscope ring draws its follicle strands once it enters the viewport. */
+  (function(){
+    var scope=document.querySelector('.scope');
+    if(!scope)return;
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce||!('IntersectionObserver' in window)){scope.classList.add('drawn');return}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){scope.classList.add('drawn');io.disconnect()}});
+    },{threshold:.4});
+    io.observe(scope);
+  })();
+  /* ===== END BESPOKE MOTION ===== */
+
+  document.documentElement.classList.add('js');
+
+  /* Scroll reveals: transform-only. */
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce||!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('in')});return}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){io.observe(el)});
+  })();
+
+  /* Mobile nav */
+  (function(){
+    var btn=document.querySelector('.menu-btn');
+    var nav=document.getElementById('m-nav');
+    if(!btn||!nav)return;
+    function close(){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.classList.remove('no-scroll')}
+    btn.addEventListener('click',function(){
+      var open=nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open?'true':'false');
+      document.body.classList.toggle('no-scroll',open);
+    });
+    nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
+  })();
+
+  /* FAQ accordion */
+  (function(){
+    document.querySelectorAll('.faq-item').forEach(function(item){
+      var q=item.querySelector('.faq-q'),a=item.querySelector('.faq-a');
+      q.addEventListener('click',function(){
+        var open=item.classList.toggle('open');
+        q.setAttribute('aria-expanded',open?'true':'false');
+        a.style.maxHeight=open?a.scrollHeight+'px':'0px';
+      });
+    });
+  })();
+
+  /* Form: demo submit, shows confirmation. Wire action to the real webhook before ads run. */
+  (function(){
+    var form=document.querySelector('.form');
+    var done=document.querySelector('.form-done');
+    if(!form||!done)return;
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){form.reportValidity();return}
+      form.hidden=true;
+      done.classList.add('show');
+      done.scrollIntoView({block:'nearest',behavior:'smooth'});
+    });
+  })();
+
+  /* Video slots (film band + hero): fade the fallback out when the wired video plays.
+     Reduced motion: pause the video and keep the still. */
+  (function(){
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    [['.film video','.film .fallback'],['.hero-photo video','.hero-photo .fallback']].forEach(function(pair){
+      var v=document.querySelector(pair[0]);
+      var fb=document.querySelector(pair[1]);
+      if(!v||!fb||!v.getAttribute('src'))return;
+      if(reduce){v.removeAttribute('autoplay');v.pause();return}
+      v.addEventListener('playing',function(){fb.style.opacity='0';fb.style.transition='opacity .8s ease'});
+    });
+  })();
+</script>
+</body>
+</html>
