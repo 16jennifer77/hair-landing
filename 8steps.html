@@ -316,7 +316,7 @@
 
     /* ============ 10. honest approach: sticky side ============ */
     .approach{background:var(--white);border-top:1px solid var(--hair-soft)}
-    .approach-grid{display:grid;grid-template-columns:4fr 8fr;gap:clamp(30px,5vw,64px)}
+    .approach-grid{display:grid;grid-template-columns:4fr 8fr;column-gap:clamp(30px,5vw,64px);row-gap:0}
     .approach-side{position:sticky;top:calc(var(--header-h) + 26px);align-self:start}
     .approach-side p{color:var(--muted);margin-top:16px}
     .principles{list-style:none;border-top:1px solid var(--hair)}
@@ -343,7 +343,7 @@
     .g-reviews .g-link:hover{border-color:var(--accent)}
 
     /* ============ 12. CTA offer ============ */
-    .faq{grid-column:2;margin-top:0;border-top:1px solid var(--hair);padding-top:22px}
+    .faq{grid-column:2;margin-top:0;padding-top:26px}
     .faq-h{font-family:var(--disp);font-weight:500;font-size:1.25rem;color:var(--ink);margin-bottom:6px}
     .faq details{border-bottom:1px solid var(--hair-soft)}
     .faq summary{cursor:pointer;list-style:none;padding:14px 32px 14px 0;font-weight:600;font-size:.98rem;color:var(--ink);position:relative}
@@ -789,7 +789,7 @@
       </ul>
       <!-- Q5 FAQ: the failure questions, answered plainly. Keep inside the medical-ad fence: no outcome guarantees. -->
       <div class="faq reveal" style="--d:.1s">
-        <h3 class="faq-h">Before you book</h3>
+        <h3 class="faq-h">FAQ</h3>
         <details open><summary>Does it hurt?</summary><p>Microneedling is done with topical numbing. Most people describe pressure and warmth rather than pain, and a session runs about 45 minutes. PRP involves a standard blood draw.</p></details>
         <details><summary>How soon would I see anything?</summary><p>Hair cycles are slow. We photograph your baseline at the consult and compare at each visit; plans are judged at three to six months, not three weeks. Response varies from person to person.</p></details>
         <details><summary>What if I see nothing?</summary><p>Then the plan changes or stops. Your own follow-up photos decide, and we will tell you plainly if we think further treatment is not worth your money.</p></details>
