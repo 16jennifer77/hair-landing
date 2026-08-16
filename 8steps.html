@@ -228,6 +228,12 @@
     .cmp-table td.us::before{content:"";position:absolute;left:16px;top:17px;width:12px;height:7px;border-left:2px solid var(--support);border-bottom:2px solid var(--support);transform:rotate(-45deg)}
     .cmp-table .tflag{display:inline-block;margin-left:10px;padding:3px 8px;border-radius:999px;background:var(--support);color:var(--navy);font-size:.62rem;letter-spacing:.12em;vertical-align:1px}
     .cmp-table td[data-l]::after{display:none}
+    .sets{list-style:none;margin:clamp(20px,3vw,30px) 0 0;padding:6px clamp(16px,2.4vw,28px);border-radius:var(--r);border:1px solid rgba(255,255,255,.22);background:rgba(0,27,63,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+    .sets li{display:grid;grid-template-columns:44px minmax(180px,.9fr) 2fr;gap:0 clamp(14px,2vw,28px);align-items:baseline;padding:14px 0;border-top:1px solid rgba(255,255,255,.14)}
+    .sets li:first-child{border-top:none}
+    .sets-n{font-family:var(--disp);font-size:.9rem;color:var(--support);letter-spacing:.04em}
+    .sets h3{font-family:var(--disp);font-weight:500;font-size:1.05rem;color:#fff;line-height:1.3}
+    .sets p{margin:0;font-size:.9rem;line-height:1.55;color:rgba(255,255,255,.8);max-width:none}
     .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
     /* ============ 4. modalities: numbered plates ============ */
@@ -471,6 +477,8 @@
       .rv-grid{grid-template-columns:1fr}
       .rv-card.rv-more{display:none}
       .team-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+      .sets li{grid-template-columns:44px 1fr;padding:12px 0}
+      .sets p{grid-column:2;margin-top:4px}
       .cmp-table,.cmp-table tbody,.cmp-table tr,.cmp-table th,.cmp-table td{display:block;width:auto}
       .cmp-table thead{display:none}
       .cmp-table tr{border-top:1px solid rgba(255,255,255,.18);padding:6px 0 10px}
@@ -636,51 +644,19 @@
     <img class="fallback kb" src="assets/treatment-room-1600x900.jpg" width="1600" height="900" alt="The Biohackr Health treatment lounge: black leather recliners, sheer curtain dividers, and a brass ring chandelier" loading="lazy" decoding="async">
     <div class="wrap film-copy">
       <div class="film-head">
-        <p class="kicker on-dark reveal">Why here, not the obvious alternative</p>
+        <p class="kicker on-dark reveal">What sets us apart</p>
         <!-- SWAP: film heading + line -->
-        <h2 id="film-h" class="reveal" style="--d:.07s">A mail-order hair kit is not a hair clinic.</h2>
-        <p class="reveal" style="--d:.14s">Plenty of places will sell you something for hair loss. The difference is whether anyone examined your scalp first, what they can offer beyond a pill, and whether progress is measured against your own baseline.</p>
+        <h2 id="film-h" class="reveal" style="--d:.07s">Hair restoration the way a medical clinic does it.</h2>
+        <p class="reveal" style="--d:.14s">Most hair-loss options are a product. Ours is a plan: examined first, matched to your follicles, and measured against your own photos.</p>
       </div>
-      <!-- SWAP: comparison table copy. Generic categories only (no named competitors); no efficacy claims. -->
-      <div class="cmp reveal" style="--d:.2s" role="region" aria-label="How Biohackr Health compares with a subscription box or a walk-in pop-up" tabindex="0">
-        <table class="cmp-table">
-          <caption class="vh">How Biohackr Health compares with a subscription box or a walk-in pop-up</caption>
-          <thead>
-            <tr>
-              <td></td>
-              <th scope="col">A subscription box or walk-in pop-up</th>
-              <th scope="col" class="us">Biohackr Health<span class="tflag">The clinic</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">The exam</th>
-              <td data-l="Them">An online quiz decides your plan.</td>
-              <td data-l="Us" class="us">A nurse examines your scalp in person, under magnification, before anything is recommended.</td>
-            </tr>
-            <tr>
-              <th scope="row">The toolkit</th>
-              <td data-l="Them">One product for everyone, shipped in a box.</td>
-              <td data-l="Us" class="us">RF microneedling, Age Zero exosomes, PRP, and prescription support, matched to your follicles.</td>
-            </tr>
-            <tr>
-              <th scope="row">Who is in charge</th>
-              <td data-l="Them">Whoever answers the chat, if anyone.</td>
-              <td data-l="Us" class="us">Licensed clinicians in our San Francisco and Palo Alto clinics, every visit.</td>
-            </tr>
-            <tr>
-              <th scope="row">Measurement</th>
-              <td data-l="Them">You judge it in the bathroom mirror.</td>
-              <td data-l="Us" class="us">Baseline photos at the consult, then progress judged against your own images.</td>
-            </tr>
-            <tr>
-              <th scope="row">The money</th>
-              <td data-l="Them">A subscription that quietly renews.</td>
-              <td data-l="Us" class="us">Prices in writing at your free consult. No obligation to book treatment.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- SWAP: differentiators (five). Generic, no named competitors, no efficacy claims. -->
+      <ol class="sets reveal" style="--d:.2s">
+        <li><span class="sets-n">01</span><h3>Examined first</h3><p>A nurse looks at your scalp in person, under magnification, before anything is recommended.</p></li>
+        <li><span class="sets-n">02</span><h3>A full toolkit, not one product</h3><p>RF microneedling, Age Zero exosomes, PRP, and prescription support, chosen for your follicles rather than sold to everyone.</p></li>
+        <li><span class="sets-n">03</span><h3>Clinicians, every visit</h3><p>Licensed clinicians in our San Francisco and Palo Alto clinics, with a physician reviewing the plan.</p></li>
+        <li><span class="sets-n">04</span><h3>Measured honestly</h3><p>Baseline photos at the consult, then progress judged against your own images, not a mirror and a guess.</p></li>
+        <li><span class="sets-n">05</span><h3>Prices in writing</h3><p>You leave the free consult with a written plan and prices. No subscription, no obligation to book treatment.</p></li>
+      </ol>
     </div>
   </section>
 
