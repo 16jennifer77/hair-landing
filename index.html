@@ -365,7 +365,7 @@
       border-radius:var(--r);overflow:hidden;
     }
     .offer-media{position:relative;min-height:380px}
-    .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;filter:saturate(1.04) contrast(1.02)}
+    .offer-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
     .offer-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 55%,rgba(0,27,63,.22))}
     @media (prefers-reduced-motion:no-preference){
       .offer-badge{animation:bob 6s ease-in-out infinite}
@@ -399,7 +399,7 @@
     .form input:hover,.form select:hover{border-color:var(--ink-2)}
     .form input:focus-visible,.form select:focus-visible{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
     .form .btn{width:100%;justify-content:center;margin-top:4px}
-    .form-fine{grid-column:1/-1;font-size:.78rem;color:var(--faint);max-width:none}
+    .form-fine{grid-column:1/-1;font-size:.78rem;color:var(--faint);max-width:none;text-align:center}
     .form-done{display:none;margin-top:26px;padding:22px;border:1px solid var(--support-deep);border-radius:var(--r);background:rgba(156,211,202,.16);color:var(--ink)}
     .form-done.show{display:block}
     .form-done b{color:var(--support-deep)}
@@ -913,8 +913,8 @@ Also their acne products WORK.</p>
         <div class="offer-media">
           <!-- SWAP: offer image -->
           <picture>
-            <source media="(max-width:960px)" srcset="assets/offer-reception-wide-1600x889.jpg">
-            <img src="assets/offer-storefront-928x1856.jpg" width="928" height="1856" alt="The Biohackr Health storefront on Union Street, San Francisco: white clapboard, navy trim, and the red-and-navy Biohackr Health sign above the door" loading="lazy" decoding="async">
+            <source media="(max-width:960px)" srcset="assets/offer-reception-wide-1600x889-v2.jpg">
+            <img src="assets/offer-storefront-928x1856-v2.jpg" width="928" height="1856" alt="The Biohackr Health storefront on Union Street, San Francisco: white clapboard, navy trim, and the red-and-navy Biohackr Health sign above the door" loading="lazy" decoding="async">
           </picture>
           <!-- SWAP: badge -->
           <span class="offer-badge">20 spots this month</span>
@@ -923,7 +923,6 @@ Also their acne products WORK.</p>
           <p class="kicker">Start with a consult</p>
           <!-- SWAP: offer heading -->
           <h2 id="offer-h">Free nurse hair consult</h2>
-          <div class="price"><b>$0</b><s>normally $100</s></div>
           <!-- SWAP: offer copy -->
           <p>A scalp exam, baseline photos, and a written plan with pricing. No credit card required, and no obligation to book treatment.</p>
           <!-- SWAP: form. Point action at the real webhook before ads run. -->
