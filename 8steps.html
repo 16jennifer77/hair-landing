@@ -24,12 +24,12 @@
    3 | is this you        | 3 asymmetric split       | IS THIS YOU?          | Q2  image + tick rows        | 120
    4 | comparison band    | 2 full-bleed + scrim     | WHY HERE              | Q3  video + glass table      | 190
    5 | modalities         | 5 numbered plates        | THE PROTOCOL          | Q4  index plates             | 150
-   6 | three sessions     | 4 ledger rows            | THREE SESSIONS        | Q4  session ledger           | 140
+   6 | clinic rail        | 6 scroll-snap rail       | INSIDE THE CLINIC     | Q4/Q7 five real photos       | 50
    7 | straight answers   | 7 sticky side + FAQ      | STRAIGHT ANSWERS      | Q5  principles + 4 FAQ       | 260
    8 | Google reviews     | 4 native cards           | FROM OUR GOOGLE       | Q6  4.9 / 48 + link          | 190
    9 | team               | 3 medal cards            | PHYSICIAN-LED         | Q7  Bluvas/Greenberg/Habibi  | 120
   10 | CTA offer + form   | split offer card         | START WITH A CONSULT  | Q8  photo + spots badge      | 110
-  (removed vs round 18: navy stat band, pull quote, clinic rail)
+  (removed vs round 18: navy stat band, pull quote, three-sessions ledger; clinic rail kept in the sessions slot)
   13 | footer             | rich footer              |                       | 2 locations + compliance    | 140
 -->
 <html lang="en">
@@ -328,6 +328,7 @@
     /* ============ 11. Google reviews ============ */
     #consult{scroll-margin-top:calc(var(--header-h) + 14px)}
     .g-reviews .wrap{text-align:center}
+    .g-reviews h2,.g-reviews .rv-agg{margin-left:auto;margin-right:auto}
     .g-reviews .kicker{justify-content:center}
     /* max-width guards against the widget helper script assigning a fixed pixel width */
     .rv-agg{margin-top:18px;font-size:.95rem;color:var(--muted)}
@@ -468,6 +469,7 @@
       .ledger-row .tag{grid-column:2;justify-self:start}
       .form{grid-template-columns:1fr}
       .rv-grid{grid-template-columns:1fr}
+      .rv-card.rv-more{display:none}
       .team-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
       .cmp-table,.cmp-table tbody,.cmp-table tr,.cmp-table th,.cmp-table td{display:block;width:auto}
       .cmp-table thead{display:none}
@@ -516,7 +518,7 @@
     <a class="brand" href="#top"><img src="assets/logo-biohackr-health-blue.png" width="454" height="76" alt="Biohackr Health"></a>
     <ul class="nav-links">
       <li><a href="#protocol">Protocol</a></li>
-      <li><a href="#sessions">Sessions</a></li>
+      <li><a href="#clinic">Clinic</a></li>
       <li><a href="#approach">Approach</a></li>
       <li><a href="#reviews">Reviews</a></li>
     </ul>
@@ -530,7 +532,7 @@
   <div class="m-nav" id="m-nav">
     <ul>
       <li><a href="#protocol">Protocol</a></li>
-      <li><a href="#sessions">Sessions</a></li>
+      <li><a href="#clinic">Clinic</a></li>
       <li><a href="#approach">Approach</a></li>
       <li><a href="#reviews">Reviews</a></li>
     </ul>
@@ -611,7 +613,7 @@
         <figcaption>The consult starts at the scalp, not the sales desk.</figcaption>
       </figure>
       <div class="signs-copy">
-        <p class="kicker reveal">Is this you?</p>
+        <p class="kicker reveal">When to come in</p>
         <!-- SWAP: heading -->
         <h2 id="signs-h" class="reveal" style="--d:.07s">Catch thinning while the follicle is still alive</h2>
         <ul class="tick-rows">
@@ -728,41 +730,20 @@
     </div>
   </section>
 
-  <!-- 5. THREE SESSIONS: LEDGER -->
-  <section class="sessions" id="sessions" aria-labelledby="sessions-h">
+    <!-- 6. INSIDE THE CLINIC: five real photos (replaces the three-sessions ledger in this variant) -->
+  <section class="rail-sect" id="clinic" aria-labelledby="rail-h" style="padding-bottom:clamp(74px,9vw,118px)">
     <div class="wrap">
-      <p class="kicker reveal">Three focused sessions</p>
+      <p class="kicker reveal">Inside the clinic</p>
       <!-- SWAP: heading -->
-      <h2 id="sessions-h" class="reveal" style="--d:.07s">Rejuvenation at the root</h2>
-      <div class="ledger">
-        <!-- SWAP: ledger rows -->
-        <div class="ledger-row reveal">
-          <span class="no">01</span>
-          <h3>Exam and baseline</h3>
-          <p>A nurse maps your scalp, reviews history and medications, and photographs your baseline so change is measured, not guessed.</p>
-          <span class="tag">Free this month</span>
-        </div>
-        <div class="ledger-row reveal" style="--d:.07s">
-          <span class="no">02</span>
-          <h3>Treatment sessions</h3>
-          <p>Three in-clinic sessions of your prescribed combination: microneedling with exosomes, PRP or PRF, spaced weeks apart.</p>
-          <span class="tag">In clinic</span>
-        </div>
-        <div class="ledger-row reveal" style="--d:.14s">
-          <span class="no">03</span>
-          <h3>Daily support at home</h3>
-          <p>Prescription minoxidil or finasteride where appropriate, plus the Hair Grow+ supplement, shipped to your door.</p>
-          <span class="tag">Telemedicine</span>
-        </div>
-        <div class="ledger-row reveal" style="--d:.21s">
-          <span class="no">04</span>
-          <h3>Review and maintain</h3>
-          <p>Follow-up photos against your baseline. Keep what is working, drop what is not, and set a maintenance cadence.</p>
-          <span class="tag">Measured</span>
-        </div>
-      </div>
-      <!-- SWAP: ledger footnote -->
-      <p class="ledger-note">Hair follicles cycle slowly. Most protocols are judged over months, and your plan says so up front.</p>
+      <h2 id="rail-h" class="reveal" style="--d:.07s">Regenerative medicine, not a med spa upsell</h2>
+    </div>
+    <div class="rail" tabindex="0" aria-label="Clinic photos, scroll horizontally">
+      <!-- SWAP: rail images + captions. First item is a REAL treatment photo (Sylfirm 4K shoot frame). -->
+      <figure class="reveal"><div class="media"><img src="assets/rf-microneedling-real-928x1160.jpg" width="928" height="1160" alt="The gold RF microneedling handpiece working at a patient's hairline, a gloved hand parting the hair" loading="lazy" decoding="async"></div><figcaption>RF microneedling, in clinic<small>Real treatment, photographed at Biohackr</small></figcaption></figure>
+      <figure class="reveal" style="--d:.07s"><div class="media"><img src="assets/exosome-vial-928x1160.jpg" width="928" height="1160" alt="A glass vial of Age Zero exosome serum on a steel tray beside a microneedling pen" loading="lazy" decoding="async"></div><figcaption>Age Zero exosomes<small>Regenerative messengers, applied in clinic</small></figcaption></figure>
+      <figure class="reveal" style="--d:.07s"><div class="media"><img src="assets/prp-centrifuge-928x1160.jpg" width="928" height="1160" alt="A gloved clinician loading a sealed tube into a benchtop centrifuge to prepare PRP" loading="lazy" decoding="async"></div><figcaption>PRP prepared on site<small>Your own growth factors, same visit</small></figcaption></figure>
+      <figure class="reveal" style="--d:.14s"><div class="media"><img src="assets/consult-hair-928x1160.jpg" width="928" height="1160" alt="A Biohackr team member writing out a treatment plan with a patient at the white consult table" loading="lazy" decoding="async"></div><figcaption>A written plan, reviewed with you<small>Progress judged against your own baseline</small></figcaption></figure>
+      <figure class="reveal" style="--d:.21s"><div class="media"><img src="assets/hair-grow-supplement-928x1160.jpg" width="928" height="1160" alt="The Biohackr Health Hair Grow+ supplement bottle on a terracotta tray beside trailing ivy" loading="lazy" decoding="async"></div><figcaption>Hair Grow+ supplement<small>The daily formula, shipped to your door</small></figcaption></figure>
     </div>
   </section>
 
@@ -841,6 +822,28 @@ In short, if you&#x27;re on Union Street and looking for a place to elevate your
 
 Also their acne products WORK.</p>
           <div class="rv-meta"><b>Isabella Hernandez</b><span>Google · Jun 2024</span></div>
+        </li>
+        <li class="rv-card rv-more">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">Nurse Lindsey always consults my current situation, whether illness or fitness, and guides me on what I need! I have gotten several vitamin shots, body scans, and IVs. I always feel at home in the massage chairs and leave feeling like a million bucks. Will definitely be back!</p>
+          <div class="rv-meta"><b>Manning Edson</b><span>Google · Jun 2024</span></div>
+        </li>
+        <li class="rv-card rv-more">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">Amazing service and space, very comfortable and clean. The staff is absolutely incredible, Lindsey, their nurse on most days, knows each treatment so well and is helpful in finding the right treatments without feeling salesy or pushing unnecessary things.
+
+I&#x27;ve been here three times in a month and each time left feeling informed and well taken care of. Their pricing is competitive and the team makes it an amazing experience!</p>
+          <div class="rv-meta"><b>Tanner Hanson</b><span>Google · May 2024</span></div>
+        </li>
+        <li class="rv-card rv-more">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">The service offerings fill in many gaps I was looking for and the results are outstanding. The staff very professional. Highly recommend.</p>
+          <div class="rv-meta"><b>Kathi Joy</b><span>Google · Apr 2024</span></div>
+        </li>
+        <li class="rv-card rv-more">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">Great and friendly service !</p>
+          <div class="rv-meta"><b>mike</b><span>Google · Apr 2024</span></div>
         </li>
       </ul>
       <a class="g-link reveal" style="--d:.2s" href="https://www.google.com/search?q=biohackr+health#lrd=0x808581657af64d31:0x1a2a2a9bc73a82fc,1,,," target="_blank" rel="noopener">Read all our reviews on Google</a>
@@ -1086,12 +1089,12 @@ Also their acne products WORK.</p>
     });
   })();
 
-  /* Google reviews: refresh the four baked cards from the live GHL widget data (CORS-open). Never shows more than four. */
+  /* Google reviews: refresh the four baked cards from the live GHL widget data (CORS-open). Desktop shows eight, mobile four (CSS hides 5-8). */
   (function(){
     var list=document.getElementById('rv-list'); if(!list||!window.fetch)return;
     fetch('https://backend.leadconnectorhq.com/appengine/reviews/get_widget/vscbiVBPwkbdhVINAGjF',{mode:'cors'}).then(function(r){return r.text()}).then(function(t){
       var m=t.match(/window\.__SSR_DATA__ = (\{[\s\S]*?\});?\s*<\/script>/); if(!m)return;
-      var d=JSON.parse(m[1]); var revs=(d.reviews||[]).filter(function(r){return r.comment&&r.comment.trim()}).slice(0,4); if(revs.length<4)return;
+      var d=JSON.parse(m[1]); var revs=(d.reviews||[]).filter(function(r){return r.comment&&r.comment.trim()}).slice(0,8); if(revs.length<4)return;
       var agg=d.aggregateData||{}; var rt=document.getElementById('rv-rating'), rc=document.getElementById('rv-count');
       if(agg.totalRating&&rt)rt.textContent=agg.totalRating; if(agg.totalReviews&&rc)rc.textContent=agg.totalReviews;
       var mons=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
