@@ -22,7 +22,7 @@
    2 | credentials strip  | centered strip           |                       | typographic credentials     | 25
    3 | film band          | 2 full-bleed + scrim     | INSIDE THE PROGRAM    | video slot + ken burns      | 50
    4 | modalities         | 5 numbered plates        | THE PROTOCOL          | index plates, follicle marks| 150
-   5 | three sessions     | 4 ledger rows            | THREE SESSIONS        | session ledger + timeline   | 140
+   5 | how it runs        | 4-node path track        | HOW IT RUNS           | numbered nodes on drawn line| 60
    6 | navy stat band     | 9 stat band              | MEASURED CARE         | oversized numerals          | 40
    7 | signs              | 3 asymmetric split       | WHEN TO COME IN       | image + tick rows           | 120
    8 | pull quote         | 11 editorial quote       |                       | oversized quote mark        | 40
@@ -251,19 +251,34 @@
     .sect-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
     .sect-head p{color:var(--muted)}
 
-    /* ============ 5. three sessions: ledger ============ */
+    /* ============ 5. how it runs: path track ============ */
     .sessions{background:var(--white);border-top:1px solid var(--hair-soft);border-bottom:1px solid var(--hair-soft)}
-    .ledger{margin-top:clamp(32px,4vw,46px);border-top:1px solid var(--hair)}
-    .ledger-row{
-      display:grid;grid-template-columns:88px minmax(0,1.1fr) minmax(0,1.6fr) 150px;gap:clamp(16px,3vw,34px);align-items:center;
-      padding:26px 4px;border-bottom:1px solid var(--hair);transition:background .2s ease;
+    .path-head{text-align:center;max-width:620px;margin:0 auto}
+    .path-head h2{margin:0 auto}
+    .path{--pg:clamp(20px,3vw,40px);--node:56px;position:relative;list-style:none;padding:0;margin:clamp(44px,5.6vw,66px) 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--pg)}
+    .path::before{content:"";position:absolute;left:calc(var(--node)/2);right:calc((100% - 3*var(--pg))/4 - var(--node)/2);top:calc(var(--node)/2);height:1px;background:var(--hair);transform-origin:left}
+    .js .path.reveal{transform:none;transition:none}   /* the ol is only the trigger; steps carry their own reveal */
+    @media (prefers-reduced-motion:no-preference){
+      .js .path.reveal::before{transform:scaleX(0);transition:transform 1.5s cubic-bezier(.17,.67,.3,1) .2s}
+      .js .path.reveal.in::before{transform:none}
     }
-    .ledger-row:hover{background:var(--paper)}
-    .ledger-row .no{font-family:var(--disp);font-size:1.7rem;color:var(--accent)}
-    .ledger-row h3{font-size:1.14rem}
-    .ledger-row p{font-size:.92rem;color:var(--muted);max-width:52ch}
-    .ledger-row .tag{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--support-deep);white-space:nowrap;justify-self:end;text-align:right}
-    .ledger-note{margin-top:18px;font-size:.85rem;color:var(--faint)}
+    .path-step{position:relative;padding-top:calc(var(--node) + 22px)}
+    .path-node{position:absolute;top:0;left:0;width:var(--node);height:var(--node);border-radius:50%;border:1px solid var(--ink-2);background:var(--white);display:grid;place-items:center;font-family:var(--disp);font-size:1.12rem;color:var(--navy);letter-spacing:.04em}
+    .path-step.is-open .path-node{background:var(--accent);border-color:var(--accent);color:#fff}
+    .path-step h3{font-size:1.14rem}
+    .path-step p{margin-top:6px;font-size:.92rem;color:var(--muted);max-width:30ch}
+    .path-tag{display:inline-block;margin-top:14px;padding:5px 11px;border-radius:999px;border:1px solid var(--hair);font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--support-deep);white-space:nowrap}
+    .path-step.is-open .path-tag{border-color:var(--accent);color:var(--accent-deep)}
+    .path-note{margin:clamp(30px,4vw,44px) auto 0;text-align:center;font-size:.85rem;color:var(--faint);max-width:none}
+    @media (max-width:900px){
+      .path{grid-template-columns:1fr;gap:0}
+      .path::before{display:none}
+      .path-step{padding:0 0 30px calc(var(--node) + 22px)}
+      .path-step:not(:last-child)::before{content:"";position:absolute;left:calc(var(--node)/2);top:var(--node);bottom:0;width:1px;background:var(--hair)}
+      .path-step:last-child{padding-bottom:0}
+      .path-step h3{min-height:var(--node);display:flex;align-items:center}
+      .path-step p{max-width:44ch}
+    }
 
     /* ============ 6. stat band ============ */
     .stats{background:var(--navy);color:#fff;position:relative;overflow:clip}
@@ -312,6 +327,9 @@
     /* ============ 9. clinic rail ============ */
     .rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(340px,78vw);gap:clamp(16px,2.4vw,24px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:26px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:clamp(30px,4vw,44px) 26px 12px;max-width:1160px;margin:0 auto;scrollbar-width:thin}
     .rail figure{scroll-snap-align:start;scroll-snap-stop:always;margin:0}
+    .rail.marquee{scroll-snap-type:none;scrollbar-width:none}   /* mobile auto-scroll: free swipe, no snap jumps */
+    .rail.marquee::-webkit-scrollbar{display:none}
+    .rail .clone{transform:none}
     .rail .media{border-radius:var(--r);overflow:hidden;border:1px solid var(--hair)}
     .rail img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(.16) contrast(1.04) brightness(.97) sepia(.06);transition:transform .5s ease}
     @media (hover:hover){.rail figure:hover img{transform:scale(1.03)}}
@@ -463,9 +481,6 @@
       .m-nav{display:none !important}
       .nav .nav-cta{display:none}
       .plates{grid-template-columns:1fr}
-      .ledger-row{grid-template-columns:56px 1fr;grid-template-rows:auto auto}
-      .ledger-row p{grid-column:2}
-      .ledger-row .tag{grid-column:2;justify-self:start}
       .form{grid-template-columns:1fr}
       .rv-grid{grid-template-columns:1fr}
       .team-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
@@ -497,7 +512,7 @@
   02. Header: brand, nav labels, CTA
   03. Q1 Is this for me: hero (kicker, h1, lede, CTAs, offer note, media) + qualification strip (4 items) + signs section (image, heading, 4 tick rows, closing line)
   04. Q2 What is my pain: statement band (one paragraph)
-  05. Q3 What exactly do I get: 4 modality plates + 4-row path ledger + footnote
+  05. Q3 What exactly do I get: 4 modality plates + 4-node path track + footnote
   06. Q4 Why not the obvious alternative: film band, Why Biohackr Health, 4 reason cards
   07. Q5 What happens when it fails: side heading + 3 rows
   08. Q6 Proof: Google reviews (live GHL widget), link to all reviews
@@ -681,38 +696,40 @@
   <!-- Q3. WHAT EXACTLY DO I GET: the path -->
   <section class="sessions" id="sessions" aria-labelledby="sessions-h">
     <div class="wrap">
-      <p class="kicker reveal">How it runs</p>
-      <!-- SWAP: heading -->
-      <h2 id="sessions-h" class="reveal" style="--d:.07s">Consult to results</h2>
-      <div class="ledger">
-        <!-- SWAP: ledger rows -->
-        <div class="ledger-row reveal">
-          <span class="no">01</span>
+      <div class="path-head">
+        <p class="kicker reveal">How it runs</p>
+        <!-- SWAP: heading -->
+        <h2 id="sessions-h" class="reveal" style="--d:.07s">Consult to results</h2>
+      </div>
+      <ol class="path reveal">
+        <!-- SWAP: path steps -->
+        <li class="path-step is-open reveal">
+          <span class="path-node" aria-hidden="true">01</span>
           <h3>Exam and baseline</h3>
           <p>Scalp exam, baseline photos, written plan with prices.</p>
-          <span class="tag">Free this month</span>
-        </div>
-        <div class="ledger-row reveal" style="--d:.07s">
-          <span class="no">02</span>
+          <span class="path-tag">Free this month</span>
+        </li>
+        <li class="path-step reveal" style="--d:.09s">
+          <span class="path-node" aria-hidden="true">02</span>
           <h3>Three sessions</h3>
           <p>Your combination, in clinic, weeks apart.</p>
-          <span class="tag">In clinic</span>
-        </div>
-        <div class="ledger-row reveal" style="--d:.14s">
-          <span class="no">03</span>
+          <span class="path-tag">In clinic</span>
+        </li>
+        <li class="path-step reveal" style="--d:.18s">
+          <span class="path-node" aria-hidden="true">03</span>
           <h3>Daily support at home</h3>
           <p>Prescription and supplement, shipped to you.</p>
-          <span class="tag">Telemedicine</span>
-        </div>
-        <div class="ledger-row reveal" style="--d:.21s">
-          <span class="no">04</span>
+          <span class="path-tag">Telemedicine</span>
+        </li>
+        <li class="path-step reveal" style="--d:.27s">
+          <span class="path-node" aria-hidden="true">04</span>
           <h3>Review and maintain</h3>
           <p>Photos vs baseline. Keep what works.</p>
-          <span class="tag">Measured</span>
-        </div>
-      </div>
-      <!-- SWAP: ledger footnote -->
-      <p class="ledger-note">Follicles cycle slowly. Plans are judged over months.</p>
+          <span class="path-tag">Measured</span>
+        </li>
+      </ol>
+      <!-- SWAP: path footnote -->
+      <p class="path-note">Follicles cycle slowly. Plans are judged over months.</p>
     </div>
   </section>
 
@@ -989,6 +1006,74 @@ Also their acne products WORK.</p>
 
   document.documentElement.classList.add('js');
 
+  /* Clinic rail: on mobile the photos + captions scroll right-to-left on their own (seamless loop).
+     A touch stops it; the user can slide either way; ~3s after the last touch/scroll it continues. */
+  (function(){
+    var rail=document.querySelector('.rail');
+    if(!rail)return;
+    var mq=window.matchMedia('(max-width:720px)');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+    var SPEED=44, RESUME=3000, COPIES=3;
+    var originals=Array.prototype.slice.call(rail.children);
+    var on=false,running=false,raf=0,timer=0,last=0,pos=0,W=0,visible=true;
+    function measure(){
+      var f=originals, n=f.length;
+      if(n<2){W=0;return}
+      W=(f[n-1].offsetLeft-f[0].offsetLeft)/(n-1)*n;   /* one full set incl. one gap */
+    }
+    function start(){
+      if(on)return; on=true;
+      for(var c=1;c<COPIES;c++){originals.forEach(function(el){var k=el.cloneNode(true);k.classList.remove('reveal','in');k.classList.add('clone');k.setAttribute('aria-hidden','true');rail.appendChild(k)})}
+      rail.classList.add('marquee');
+      measure(); pos=W; rail.scrollLeft=pos;
+      resume();
+    }
+    function stop(){
+      if(!on)return; on=false; pause(); clearTimeout(timer);
+      rail.classList.remove('marquee');
+      Array.prototype.slice.call(rail.querySelectorAll('.clone')).forEach(function(k){k.remove()});
+      rail.scrollLeft=0;
+    }
+    function tick(t){
+      if(!running)return;
+      var dt=last?Math.min(t-last,64):0; last=t;
+      pos+=SPEED*dt/1000;
+      if(pos>=2*W)pos-=W;
+      rail.scrollLeft=pos;
+      raf=requestAnimationFrame(tick);
+    }
+    function resume(){
+      clearTimeout(timer);
+      if(!on||running||!visible||document.hidden)return;
+      measure(); if(!W)return;
+      pos=rail.scrollLeft; last=0; running=true; raf=requestAnimationFrame(tick);
+    }
+    function pause(){running=false; cancelAnimationFrame(raf)}
+    function userHold(){pause(); clearTimeout(timer)}
+    function userRelease(){clearTimeout(timer); timer=setTimeout(resume,RESUME)}
+    rail.addEventListener('touchstart',userHold,{passive:true});
+    rail.addEventListener('pointerdown',userHold,{passive:true});
+    rail.addEventListener('touchend',userRelease,{passive:true});
+    rail.addEventListener('touchcancel',userRelease,{passive:true});
+    rail.addEventListener('pointerup',userRelease,{passive:true});
+    rail.addEventListener('pointercancel',userRelease,{passive:true});
+    rail.addEventListener('scroll',function(){
+      if(!on)return;
+      var sl=rail.scrollLeft;
+      if(sl>=2*W){rail.scrollLeft=sl-W}else if(sl<=0){rail.scrollLeft=sl+W}   /* seamless wrap while the user drags */
+      if(!running){clearTimeout(timer); timer=setTimeout(resume,RESUME)}      /* momentum still going: wait it out */
+    },{passive:true});
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(es){es.forEach(function(e){visible=e.isIntersecting; if(visible){resume()}else{pause()}})},{threshold:.05}).observe(rail);
+    }
+    document.addEventListener('visibilitychange',function(){document.hidden?pause():resume()});
+    window.addEventListener('resize',function(){if(on){measure()}});
+    function apply(){ if(mq.matches&&!reduce.matches){start()}else{stop()} }
+    (mq.addEventListener?mq.addEventListener('change',apply):mq.addListener(apply));
+    (reduce.addEventListener?reduce.addEventListener('change',apply):reduce.addListener(apply));
+    window.addEventListener('load',apply); apply();
+  })();
+
   /* Scroll reveals: transform-only. */
   (function(){
     var els=document.querySelectorAll('.reveal');
@@ -1043,7 +1128,8 @@ Also their acne products WORK.</p>
 
   /* Mobile: any link to #start lands on the "Start with a consult" copy, not the offer photo above it. */
   (function(){
-    var target=document.getElementById('consult'); if(!target)return;
+    var body=document.getElementById('consult'); if(!body)return;
+    var target=body.querySelector('.kicker')||body;   /* land just above the "Next step" kicker, photo fully out of view (Jennifer 08-18) */
     document.querySelectorAll('a[href="#start"]').forEach(function(a){
       a.addEventListener('click',function(e){
         if(!window.matchMedia('(max-width:960px)').matches)return;
@@ -1051,7 +1137,7 @@ Also their acne products WORK.</p>
         var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
         requestAnimationFrame(function(){
           var hh=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h'))||70;
-          var y=0,el=target; while(el){y+=el.offsetTop||0; el=el.offsetParent} y-=(hh+14); /* offsetTop ignores the .reveal entrance transform */
+          var y=0,el=target; while(el){y+=el.offsetTop||0; el=el.offsetParent} y-=(hh+10); /* offsetTop ignores the .reveal entrance transform */
           window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
           if(history.replaceState)history.replaceState(null,'','#start');
         });
