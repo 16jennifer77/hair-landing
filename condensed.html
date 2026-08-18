@@ -802,39 +802,28 @@
            widget (vscbiVBPwkbdhVINAGjF, same source the botox LP uses). Markup below is baked from the
            live data at build time; on load the page refetches the widget (CORS-open) and refreshes
            the four cards + the aggregate line, so it stays current without ever showing more than four. -->
-      <p class="rv-agg reveal" style="--d:.1s"><span class="rv-agg-stars" aria-hidden="true">★★★★★</span><b id="rv-rating">4.9</b> average from <b id="rv-count">48</b> Google reviews</p>
+      <p class="rv-agg reveal" style="--d:.1s"><span class="rv-agg-stars" aria-hidden="true">★★★★★</span><b id="rv-rating">4.8</b> average from <b id="rv-count">131</b> Google reviews</p>
       <ul id="rv-list" class="rv-grid reveal" style="--d:.14s">
+        <!-- Newest Google reviews on file (verified 2026-08-18 via the Google-sourced Birdeye feed for place ChIJMU32emWBhYAR_II6x5sqKho; texts verbatim). -->
+        <li class="rv-card">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">High quality offerings at unbeatable prices. Came here for NAD+ IV and glutathione, also picked up some creatine as they sell a number of premium health and beauty products under their label. Highly recommend.</p>
+          <div class="rv-meta"><b>Colette</b><span>Google · Oct 2025</span></div>
+        </li>
+        <li class="rv-card">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">I had an excellent experience at Biohackr Health! From the moment I arrived, the staff was welcoming and professional. Every step of my treatment was explained clearly and I felt well taken care.</p>
+          <div class="rv-meta"><b>Ivannia Madrigal</b><span>Google · Sep 2025</span></div>
+        </li>
+        <li class="rv-card">
+          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="rv-text">Ease, efficient, in and out appointment for Vitamin D shot. Smooth appointment, shot was done well, and quickly out the door again.</p>
+          <div class="rv-meta"><b>Jack Gardner</b><span>Google · Sep 2025</span></div>
+        </li>
         <li class="rv-card">
           <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
           <p class="rv-text">I love sweet Nurse Lindsey Ann! Will keep coming to see her! So many fabulous services. The space is clean, and I feel super well taken care of by the kind team! Super competent nurse who had tons of knowledge to educate me. Sounds like there are so many more things to discover here as I bio hack my way back to health. Will keep coming back! Thanks again for the best care!!!</p>
           <div class="rv-meta"><b>Christie Bui</b><span>Google · Aug 2024</span></div>
-        </li>
-        <li class="rv-card">
-          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="rv-text">This place is nothing short of amazing!! I feel fantastic and everyone is so nice and accommodating! I’ve had to bring my kiddos with me a few times and they were so sweet to my boys! 10/10</p>
-          <div class="rv-meta"><b>Jessica Entzel</b><span>Google · Jun 2024</span></div>
-        </li>
-        <li class="rv-card">
-          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="rv-text">Hands down my favorite med spa in SF. The team is fantastic; I&#x27;ve never had a bad experience with anyone there. Nurse Lindsey is the best--she&#x27;s super knowledgeable on all of their treatments and always works with me to ensure I&#x27;m getting the right ones for my needs and receiving the best care. Paulina, the patient care coordinator, is awesome, super friendly and helpful and always very accommodating of my hectic schedule.</p>
-          <div class="rv-meta"><b>Ariana Fariab</b><span>Google · Jun 2024</span></div>
-        </li>
-        <li class="rv-card">
-          <div class="rv-stars" aria-label="5 out of 5 stars">★★★★★</div>
-          <p class="rv-text">I recently had the pleasure of visiting Biohackr on Union Street, and I must say, it was an exceptional experience from start to finish. Lindsey, the genius behind this innovative wellness hub, truly stands out as a beacon of knowledge and expertise in the biohacking community.
-
-From the moment I walked in, I was welcomed with a warm and friendly atmosphere that immediately put me at ease. The space itself is modern, clean, and equipped with the latest in health and wellness technology. It&#x27;s clear that a lot of thought and care has gone into making Biohackr not just a service, but a holistic experience.
-
-Lindsey&#x27;s approach is both professional and deeply personalized. She takes the time to understand your unique needs and goals, offering tailored advice and cutting-edge solutions that are truly transformative. Whether you&#x27;re looking to optimize your physical performance, enhance mental clarity, or simply improve your overall well-being, Lindsey&#x27;s wealth of knowledge and innovative techniques are unmatched.
-
-During my visit, I opted for the Beauty IV and Immunity IV treatments. The Beauty IV left my skin glowing and revitalized, giving me a noticeable boost in both appearance and confidence. The Immunity IV was equally impressive, fortifying my immune system and leaving me feeling robust and energized. Lindsey&#x27;s expertise and careful administration of these IV therapies ensured I received maximum benefits with minimal discomfort.
-
-What really sets Lindsey and Biohackr apart is the genuine passion and dedication to helping clients achieve their best selves. Lindsey&#x27;s enthusiasm for biohacking is contagious, and her commitment to staying at the forefront of wellness technology is evident in every aspect of her practice.
-
-In short, if you&#x27;re on Union Street and looking for a place to elevate your health and well-being, Biohackr is an absolute must-visit. Lindsey&#x27;s expertise, coupled with the state-of-the-art facilities, makes for an unparalleled experience that will leave you feeling empowered and revitalized. Five stars just aren&#x27;t enough to express how incredible this place truly is!
-
-Also their acne products WORK.</p>
-          <div class="rv-meta"><b>Isabella Hernandez</b><span>Google · Jun 2024</span></div>
         </li>
       </ul>
       <a class="g-link reveal" style="--d:.2s" href="https://www.google.com/search?q=biohackr+health#lrd=0x808581657af64d31:0x1a2a2a9bc73a82fc,1,,," target="_blank" rel="noopener">Read all our reviews on Google</a>
@@ -1213,6 +1202,8 @@ Also their acne products WORK.</p>
     fetch('https://backend.leadconnectorhq.com/appengine/reviews/get_widget/vscbiVBPwkbdhVINAGjF',{mode:'cors'}).then(function(r){return r.text()}).then(function(t){
       var m=t.match(/window\.__SSR_DATA__ = (\{[\s\S]*?\});?\s*<\/script>/); if(!m)return;
       var d=JSON.parse(m[1]); var revs=(d.reviews||[]).filter(function(r){return r.comment&&r.comment.trim()}).slice(0,4); if(revs.length<4)return;
+      /* The widget stopped syncing in Aug 2024 (still 48 reviews / 4.9). Only overwrite the baked cards if it carries something newer than them. */
+      var NEWEST_BAKED=Date.parse('2025-10-15'); if(!(Date.parse(revs[0].dateAdded)>NEWEST_BAKED))return;
       var agg=d.aggregateData||{}; var rt=document.getElementById('rv-rating'), rc=document.getElementById('rv-count');
       if(agg.totalRating&&rt)rt.textContent=agg.totalRating; if(agg.totalReviews&&rc)rc.textContent=agg.totalReviews;
       var mons=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
