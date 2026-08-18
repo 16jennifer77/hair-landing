@@ -176,8 +176,9 @@
       background:var(--white);border:1px solid var(--hair);border-radius:50%;
       box-shadow:0 18px 44px rgba(0,27,63,.18);padding:9px;z-index:3;
     }
-    .scope .port{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden}
-    .scope .port img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05) brightness(.98)}
+    .scope .port{position:relative;width:100%;height:auto;border-radius:50%;overflow:hidden}
+    .scope .port::before{content:"";display:block;padding-top:100%}   /* always a true square (iOS Safari squashes %-height inside aspect-ratio boxes) */
+    .scope .port img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05) brightness(.98)}
     .scope .port svg{position:absolute;inset:0;width:100%;height:100%}
     .scope .ring-t{stroke:rgba(255,255,255,.42);stroke-width:1;fill:none}
     .scope .tick{stroke:rgba(255,255,255,.85);stroke-width:1.4}
@@ -588,7 +589,7 @@
         <!-- SWAP: offer microline -->
         <p class="hero-note reveal" style="--d:.24s">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/></svg>
-          Nurse consult free this month, normally $100. 20 spots.
+          Nurse consult free, normally $100. 20 spots available this month.
         </p>
       </div>
       <div class="hero-visual reveal" style="--d:.14s">
