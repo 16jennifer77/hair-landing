@@ -284,12 +284,9 @@
       .js .path-step.reveal.in{transform:none}
     }
     @media (prefers-reduced-motion:reduce){.js .path-step.reveal{transform:none;transition:none}}
-    /* desktop: section holds while 01 shows, then 02-04 + the line come in as you keep scrolling (Jennifer 08-18) */
+    /* desktop: once the section is in view, 01-04 + the line come in one by one on their own (Jennifer 08-18) */
     @media (min-width:901px) and (prefers-reduced-motion:no-preference){
-      .js .sessions.pin{--pin:55vh}
-      .js .sessions.pin::after{content:"";display:block;height:var(--pin)}   /* in-flow room for the sticky hold (sticky can't travel into padding) */
-      .js .sessions.pin .wrap{position:sticky;top:calc(var(--header-h) + 24px)}
-      .js .path.reveal::before,.js .path.reveal.in::before{transform:scaleX(var(--seg,1));transition:transform .55s cubic-bezier(.17,.67,.3,1)}
+      .js .path.reveal::before,.js .path.reveal.in::before{transform:scaleX(var(--seg,1));transition:transform .5s cubic-bezier(.17,.67,.3,1)}
       .js .path-step.reveal.later{opacity:0;transform:translateY(26px);transition:opacity .4s ease,transform .55s cubic-bezier(.17,.67,.3,1)}
       .js .path-step.reveal.later.in{opacity:1;transform:none}
     }
@@ -1099,16 +1096,8 @@
     if(reduce||!('IntersectionObserver' in window)){all.forEach(function(el){el.classList.add('in')});return}
     var mob=window.matchMedia('(max-width:900px)').matches;
     var steps=Array.prototype.slice.call(document.querySelectorAll('.path-step.reveal'));
-    var pinSec=!mob&&document.querySelector('.sessions'), pinWrap=pinSec&&pinSec.querySelector('.wrap'), pinOl=pinSec&&pinSec.querySelector('.path');
-    var pin=false;
-    if(pinSec&&pinWrap&&pinOl&&steps.length===4){
-      pinSec.classList.add('pin');
-      var stickTop=parseFloat(getComputedStyle(pinWrap).top)||0;
-      pin=(window.innerHeight>=pinWrap.offsetHeight+stickTop+40);   /* only pin when the whole block fits while held */
-      if(!pin){pinSec.classList.remove('pin')}
-      else{stickTop=Math.max(stickTop,Math.round((window.innerHeight-pinWrap.offsetHeight)/2));pinWrap.style.top=stickTop+'px'}   /* hold it vertically centred */
-    }
-    var els=Array.prototype.filter.call(all,function(el){return !(el.classList.contains('path-step')&&(mob||pin))||(pin&&el===steps[0])});
+    var pathOl=!mob&&document.querySelector('.path'), cascade=!!(pathOl&&steps.length===4);
+    var els=Array.prototype.filter.call(all,function(el){return !(el.classList.contains('path-step')&&(mob||cascade))});
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
     },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
@@ -1120,19 +1109,15 @@
       },{threshold:.3,rootMargin:'0px 0px -28% 0px'});
       document.querySelectorAll('.path-step.reveal').forEach(function(el){io2.observe(el)});
     }
-    if(pin){ /* desktop: 01 on entry; 02-04 + line segments at 20/50/80% of the held scroll distance */
-      var later=steps.slice(1), TH=[.2,.5,.8], done=0;
-      later.forEach(function(el){el.classList.add('later')});
-      pinOl.style.setProperty('--seg','0');
-      var onScroll=function(){
-        var r=pinSec.getBoundingClientRect();
-        var padTop=parseFloat(getComputedStyle(pinSec).paddingTop)||0;
-        var D=window.innerHeight*.55;
-        var p=(stickTop-padTop-r.top)/D;
-        while(done<3&&p>=TH[done]){later[done].classList.add('in');done++;pinOl.style.setProperty('--seg',String(done/3))}
-        if(done===3)window.removeEventListener('scroll',onScroll);
-      };
-      window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+    if(cascade){ /* desktop: on entry, 01-04 + line segments come in one by one, ~.4s apart */
+      steps.forEach(function(el){el.classList.add('later')});
+      pathOl.style.setProperty('--seg','0');
+      var io3=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(!e.isIntersecting)return; io3.disconnect();
+          steps.forEach(function(el,i){ setTimeout(function(){ el.classList.add('in'); pathOl.style.setProperty('--seg',String(i/3)); }, i*400); });
+        });
+      },{threshold:.35,rootMargin:'0px 0px -8% 0px'});
+      io3.observe(pathOl);
     }
   })();
 
