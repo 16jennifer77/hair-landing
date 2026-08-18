@@ -1007,13 +1007,13 @@ Also their acne products WORK.</p>
   document.documentElement.classList.add('js');
 
   /* Clinic rail: on mobile the photos + captions scroll right-to-left on their own (seamless loop).
-     A touch stops it; the user can slide either way; ~3s after the last touch/scroll it continues. */
+     A touch stops it; the user can slide either way; ~1.5s after the last touch/scroll it continues. */
   (function(){
     var rail=document.querySelector('.rail');
     if(!rail)return;
     var mq=window.matchMedia('(max-width:720px)');
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
-    var SPEED=44, RESUME=3000, COPIES=3;
+    var SPEED=44, RESUME=1500, COPIES=3;
     var originals=Array.prototype.slice.call(rail.children);
     var on=false,running=false,raf=0,timer=0,last=0,pos=0,W=0,visible=true;
     function measure(){
