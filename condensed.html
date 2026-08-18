@@ -278,7 +278,11 @@
       .path-step:last-child{padding-bottom:0}
       .path-step h3{min-height:var(--node);display:flex;align-items:center}
       .path-step p{max-width:44ch}
+      /* mobile: each step slides in from the right on its own as you reach it (Jennifer 08-18) */
+      .js .path-step.reveal{transform:translateX(64px);transition-delay:0s;transition-duration:.75s}
+      .js .path-step.reveal.in{transform:none}
     }
+    @media (prefers-reduced-motion:reduce){.js .path-step.reveal{transform:none;transition:none}}
 
     /* ============ 6. stat band ============ */
     .stats{background:var(--navy);color:#fff;position:relative;overflow:clip}
@@ -325,9 +329,11 @@
     .quote cite{display:block;margin-top:22px;font-style:normal;font-size:.8rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
     /* ============ 9. clinic rail ============ */
-    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(340px,78vw);gap:clamp(16px,2.4vw,24px);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:26px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:clamp(30px,4vw,44px) 26px 12px;max-width:1160px;margin:0 auto;scrollbar-width:thin}
+    .rail{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:26px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:clamp(30px,4vw,44px) 26px 12px;max-width:1160px;margin:0 auto;scrollbar-width:thin}
+    .rail-track{display:grid;grid-auto-flow:column;grid-auto-columns:min(340px,78vw);gap:clamp(16px,2.4vw,24px);width:max-content}
+    .rail.marquee .rail-track{will-change:transform}
     .rail figure{scroll-snap-align:start;scroll-snap-stop:always;margin:0}
-    .rail.marquee{scroll-snap-type:none;scrollbar-width:none}   /* mobile auto-scroll: free swipe, no snap jumps */
+    .rail.marquee{scroll-snap-type:none;scrollbar-width:none;max-width:none;padding-left:0;padding-right:0}   /* auto-glide: full-bleed, free swipe, no snap jumps */
     .rail.marquee::-webkit-scrollbar{display:none}
     .rail .clone{transform:none}
     .rail .media{border-radius:var(--r);overflow:hidden;border:1px solid var(--hair)}
@@ -463,6 +469,9 @@
     /* ============ responsive ============ */
     @media (max-width:960px){
       .hero-grid,.signs-grid,.approach-grid,.offer-card{grid-template-columns:1fr}
+      /* stacked layouts: same storefront photo as desktop, cropped to the Biohackr Health sign (Jennifer 08-18) */
+      .offer-media{height:72vw;max-height:640px;overflow:hidden}
+      .offer-media img{inset:auto;left:0;top:0;width:125%;height:auto;object-fit:unset;transform:translateY(-15%)}
       .plates{grid-template-columns:1fr 1fr}
       .stat-grid{grid-template-columns:1fr 1fr;gap:30px}
       .creds-row{grid-template-columns:1fr 1fr}
@@ -499,7 +508,6 @@
       .hero-visual{margin-left:0}
       .scope{left:auto;right:-8px;bottom:-38px;width:170px}
       .offer-media{min-height:280px}
-      .offer-media img{object-position:50% 40%}
       .foot-cta{grid-template-columns:1fr}
       .foot-mid{grid-template-columns:1fr}
     }
@@ -864,12 +872,14 @@ Also their acne products WORK.</p>
       <h2 id="rail-h" class="reveal" style="--d:.07s">Regenerative medicine, not a med spa upsell</h2>
     </div>
     <div class="rail" tabindex="0" aria-label="Clinic photos, scroll horizontally">
+      <div class="rail-track">
       <!-- SWAP: rail images + captions. First item is a REAL treatment photo (Sylfirm 4K shoot frame). -->
       <figure class="reveal"><div class="media"><img src="assets/rf-microneedling-real-928x1160.jpg" width="928" height="1160" alt="The gold RF microneedling handpiece working at a patient's hairline, a gloved hand parting the hair" loading="lazy" decoding="async"></div><figcaption>RF microneedling<small>Photographed at Biohackr</small></figcaption></figure>
       <figure class="reveal" style="--d:.07s"><div class="media"><img src="assets/exosome-vial-928x1160.jpg" width="928" height="1160" alt="A glass vial of Age Zero exosome serum on a steel tray beside a microneedling pen" loading="lazy" decoding="async"></div><figcaption>Age Zero exosomes<small>Applied in clinic</small></figcaption></figure>
       <figure class="reveal" style="--d:.07s"><div class="media"><img src="assets/prp-centrifuge-928x1160.jpg" width="928" height="1160" alt="A gloved clinician loading a sealed tube into a benchtop centrifuge to prepare PRP" loading="lazy" decoding="async"></div><figcaption>PRP on site<small>Same visit</small></figcaption></figure>
       <figure class="reveal" style="--d:.14s"><div class="media"><img src="assets/consult-hair-928x1160.jpg" width="928" height="1160" alt="A Biohackr team member writing out a treatment plan with a patient at the white consult table" loading="lazy" decoding="async"></div><figcaption>A written plan<small>Judged against your baseline</small></figcaption></figure>
       <figure class="reveal" style="--d:.21s"><div class="media"><img src="assets/hair-grow-supplement-928x1160.jpg" width="928" height="1160" alt="The Biohackr Health Hair Grow+ supplement bottle on a terracotta tray beside trailing ivy" loading="lazy" decoding="async"></div><figcaption>Hair Grow+<small>Shipped to you</small></figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -880,7 +890,6 @@ Also their acne products WORK.</p>
         <div class="offer-media">
           <!-- SWAP: offer image -->
           <picture>
-            <source media="(max-width:960px)" srcset="assets/offer-reception-wide-1600x889-v2.jpg">
             <img src="assets/offer-storefront-928x1856-v2.jpg" width="928" height="1856" alt="The Biohackr Health storefront on Union Street, San Francisco: white clapboard, navy trim, and the red-and-navy Biohackr Health sign above the door" loading="lazy" decoding="async">
           </picture>
           <!-- SWAP: badge -->
@@ -1006,49 +1015,56 @@ Also their acne products WORK.</p>
 
   document.documentElement.classList.add('js');
 
-  /* Clinic rail: on mobile the photos + captions scroll right-to-left on their own (seamless loop).
-     A touch stops it; the user can slide either way; ~1.5s after the last touch/scroll it continues. */
+  /* Clinic rail: the photos + captions glide right-to-left on their own (seamless loop), desktop and mobile.
+     Auto mode moves the track with a sub-pixel transform (smooth); a touch bakes that position into
+     native scrollLeft so the swipe starts exactly where the picture is; ~1.5s after the last
+     touch/scroll it glides on from wherever it was left. */
   (function(){
-    var rail=document.querySelector('.rail');
-    if(!rail)return;
-    var mq=window.matchMedia('(max-width:720px)');
+    var rail=document.querySelector('.rail'), track=rail&&rail.querySelector('.rail-track');
+    if(!rail||!track)return;
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
     var SPEED=44, RESUME=1500, COPIES=3;
-    var originals=Array.prototype.slice.call(rail.children);
-    var on=false,running=false,raf=0,timer=0,last=0,pos=0,W=0,visible=true;
+    var originals=Array.prototype.slice.call(track.children);
+    var on=false,running=false,raf=0,timer=0,last=0,W=0,visible=true,tx=0,base=0,selfScroll=false;
     function measure(){
       var f=originals, n=f.length;
       if(n<2){W=0;return}
       W=(f[n-1].offsetLeft-f[0].offsetLeft)/(n-1)*n;   /* one full set incl. one gap */
     }
+    function setTx(v){tx=v;track.style.transform=v?('translate3d('+(-v)+'px,0,0)'):'none'}
+    function bake(){ /* transform -> scrollLeft, same frame, no visual change */
+      if(!tx)return; var o=rail.scrollLeft+tx; setTx(0); selfScroll=true; rail.scrollLeft=o;
+    }
     function start(){
       if(on)return; on=true;
-      for(var c=1;c<COPIES;c++){originals.forEach(function(el){var k=el.cloneNode(true);k.classList.remove('reveal','in');k.classList.add('clone');k.setAttribute('aria-hidden','true');rail.appendChild(k)})}
+      for(var c=1;c<COPIES;c++){originals.forEach(function(el){var k=el.cloneNode(true);k.classList.remove('reveal','in');k.classList.add('clone');k.setAttribute('aria-hidden','true');track.appendChild(k)})}
       rail.classList.add('marquee');
-      measure(); pos=W; rail.scrollLeft=pos;
+      measure(); rail.scrollLeft=W;
       resume();
     }
     function stop(){
-      if(!on)return; on=false; pause(); clearTimeout(timer);
+      if(!on)return; on=false; pause(); clearTimeout(timer); setTx(0);
       rail.classList.remove('marquee');
-      Array.prototype.slice.call(rail.querySelectorAll('.clone')).forEach(function(k){k.remove()});
+      Array.prototype.slice.call(track.querySelectorAll('.clone')).forEach(function(k){k.remove()});
       rail.scrollLeft=0;
     }
     function tick(t){
       if(!running)return;
       var dt=last?Math.min(t-last,64):0; last=t;
-      pos+=SPEED*dt/1000;
-      if(pos>=2*W)pos-=W;
-      rail.scrollLeft=pos;
+      var v=tx+SPEED*dt/1000;
+      if(base+v>=2*W){ /* wrap: shift the baked base back one set (identical pixels) */
+        selfScroll=true; rail.scrollLeft=base-W; base=rail.scrollLeft;
+      }
+      setTx(v);
       raf=requestAnimationFrame(tick);
     }
     function resume(){
       clearTimeout(timer);
       if(!on||running||!visible||document.hidden)return;
       measure(); if(!W)return;
-      pos=rail.scrollLeft; last=0; running=true; raf=requestAnimationFrame(tick);
+      base=rail.scrollLeft; last=0; running=true; raf=requestAnimationFrame(tick);
     }
-    function pause(){running=false; cancelAnimationFrame(raf)}
+    function pause(){running=false; cancelAnimationFrame(raf); bake()}
     function userHold(){pause(); clearTimeout(timer)}
     function userRelease(){clearTimeout(timer); timer=setTimeout(resume,RESUME)}
     rail.addEventListener('touchstart',userHold,{passive:true});
@@ -1059,30 +1075,40 @@ Also their acne products WORK.</p>
     rail.addEventListener('pointercancel',userRelease,{passive:true});
     rail.addEventListener('scroll',function(){
       if(!on)return;
+      if(selfScroll){selfScroll=false;return}
+      if(running){userHold();userRelease();return}   /* wheel / keyboard / trackpad while gliding: hand over, resume later */
       var sl=rail.scrollLeft;
       if(sl>=2*W){rail.scrollLeft=sl-W}else if(sl<=0){rail.scrollLeft=sl+W}   /* seamless wrap while the user drags */
-      if(!running){clearTimeout(timer); timer=setTimeout(resume,RESUME)}      /* momentum still going: wait it out */
+      clearTimeout(timer); timer=setTimeout(resume,RESUME);                    /* momentum still going: wait it out */
     },{passive:true});
     if('IntersectionObserver' in window){
       new IntersectionObserver(function(es){es.forEach(function(e){visible=e.isIntersecting; if(visible){resume()}else{pause()}})},{threshold:.05}).observe(rail);
     }
     document.addEventListener('visibilitychange',function(){document.hidden?pause():resume()});
     window.addEventListener('resize',function(){if(on){measure()}});
-    function apply(){ if(mq.matches&&!reduce.matches){start()}else{stop()} }
-    (mq.addEventListener?mq.addEventListener('change',apply):mq.addListener(apply));
+    function apply(){ if(!reduce.matches){start()}else{stop()} }
     (reduce.addEventListener?reduce.addEventListener('change',apply):reduce.addListener(apply));
     window.addEventListener('load',apply); apply();
   })();
 
   /* Scroll reveals: transform-only. */
   (function(){
-    var els=document.querySelectorAll('.reveal');
+    var all=document.querySelectorAll('.reveal');
     var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(reduce||!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('in')});return}
+    if(reduce||!('IntersectionObserver' in window)){all.forEach(function(el){el.classList.add('in')});return}
+    var mob=window.matchMedia('(max-width:900px)').matches;
+    var els=Array.prototype.filter.call(all,function(el){return !(mob&&el.classList.contains('path-step'))});
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
     },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
     els.forEach(function(el){io.observe(el)});
+    if(mob){ /* "How it runs" steps: one by one, each once it is well into view */
+      var io2=new IntersectionObserver(function(entries){
+        var k=0;
+        entries.forEach(function(e){if(e.isIntersecting){e.target.style.transitionDelay=(k++*.18)+'s';e.target.classList.add('in');io2.unobserve(e.target)}});
+      },{threshold:.3,rootMargin:'0px 0px -28% 0px'});
+      document.querySelectorAll('.path-step.reveal').forEach(function(el){io2.observe(el)});
+    }
   })();
 
   /* Mobile nav */
