@@ -78,6 +78,10 @@
     .skip:focus{left:12px;top:12px}
     .wrap{max-width:1160px;margin:0 auto;padding:0 26px}
     section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
+    /* Nav anchors sit on the section's inner content, not the padded section box, so a click lands
+       right above the first text / leading image / the offer card (Jennifer 08-22). #compare stays
+       on the section: the film video IS its top. */
+    #signs,#protocol,#reviews,#start{scroll-margin-top:calc(var(--header-h) + 12px)}
     section{padding:clamp(74px,9vw,118px) 0}
 
     h1,h2,h3{font-family:var(--disp);font-weight:600;color:var(--ink)}
@@ -366,7 +370,6 @@
     .principles p{font-size:.94rem;color:var(--muted)}
 
     /* ============ 11. Google reviews ============ */
-    #consult{scroll-margin-top:calc(var(--header-h) + 14px)}
     .g-reviews .wrap{text-align:center}
     .g-reviews .kicker{justify-content:center}
     .g-reviews h2,.team-head h2{margin-left:auto;margin-right:auto}
@@ -631,8 +634,8 @@
   </section>
 
   <!-- Q1. IS THIS FOR ME: signs -->
-  <section id="signs" aria-labelledby="signs-h">
-    <div class="wrap signs-grid">
+  <section aria-labelledby="signs-h">
+    <div class="wrap signs-grid" id="signs">
       <figure class="signs-media reveal">
         <!-- SWAP: signs image -->
         <img src="assets/scalp-exam-928x1160.jpg" width="928" height="1160" alt="A close view of a patient's part line and scalp during a Biohackr hair consult" loading="lazy" decoding="async">
@@ -667,8 +670,8 @@
   </section>
 
   <!-- Q3. WHAT EXACTLY DO I GET: modalities -->
-  <section id="protocol" aria-labelledby="protocol-h">
-    <div class="wrap">
+  <section aria-labelledby="protocol-h">
+    <div class="wrap" id="protocol">
       <div class="sect-head">
         <div>
           <p class="kicker reveal">What you get</p>
@@ -791,8 +794,8 @@
   </section>
 
   <!-- Q6. WHAT IS THE PROOF: Google reviews -->
-  <section id="reviews" class="g-reviews" aria-labelledby="reviews-h">
-    <div class="wrap">
+  <section class="g-reviews" aria-labelledby="reviews-h">
+    <div class="wrap" id="reviews">
       <p class="kicker reveal">The proof</p>
       <!-- SWAP: heading -->
       <h2 id="reviews-h" class="reveal" style="--d:.07s">What patients say</h2>
@@ -883,8 +886,8 @@
   </section>
 
   <!-- Q8. WHAT DO I DO NEXT: offer + form -->
-  <section class="offer" id="start" aria-labelledby="offer-h">
-    <div class="wrap">
+  <section class="offer" aria-labelledby="offer-h">
+    <div class="wrap" id="start">
       <div class="offer-card reveal">
         <div class="offer-media">
           <!-- SWAP: offer image -->
@@ -1161,25 +1164,6 @@
       });
     },{threshold:.6});
     stats.forEach(function(b){io.observe(b)});
-  })();
-
-  /* Mobile: any link to #start lands on the "Start with a consult" copy, not the offer photo above it. */
-  (function(){
-    var body=document.getElementById('consult'); if(!body)return;
-    var target=body.querySelector('.kicker')||body;   /* land just above the "Next step" kicker, photo fully out of view (Jennifer 08-18) */
-    document.querySelectorAll('a[href="#start"]').forEach(function(a){
-      a.addEventListener('click',function(e){
-        if(!window.matchMedia('(max-width:960px)').matches)return;
-        e.preventDefault();
-        var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-        requestAnimationFrame(function(){
-          var hh=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h'))||70;
-          var y=0,el=target; while(el){y+=el.offsetTop||0; el=el.offsetParent} y-=(hh+10); /* offsetTop ignores the .reveal entrance transform */
-          window.scrollTo({top:y,behavior:reduce?'auto':'smooth'});
-          if(history.replaceState)history.replaceState(null,'','#start');
-        });
-      });
-    });
   })();
 
   /* Google reviews: refresh the four baked cards from the live GHL widget data (CORS-open). Never shows more than four. */
