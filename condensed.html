@@ -1209,7 +1209,15 @@
       var fb=document.querySelector(pair[1]);
       if(!v||!fb||!v.getAttribute('src'))return;
       if(reduce){v.removeAttribute('autoplay');v.pause();return}
-      v.addEventListener('playing',function(){fb.style.opacity='0';fb.style.transition='opacity .8s ease'});
+      function fade(){fb.style.transition='opacity .8s ease';fb.style.opacity='0'}
+      v.addEventListener('playing',fade);
+      if(!v.paused&&v.currentTime>0)fade();   /* already rolling before the listener attached */
+      /* Browsers only honor autoplay for on-screen video; on phones the hero slot starts below
+         the fold, so kick play() whenever the slot scrolls into view (muted, so it is allowed). */
+      function kick(){if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}}
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)kick()})},{threshold:.2}).observe(v);
+      }else{kick()}
     });
   })();
 </script>
